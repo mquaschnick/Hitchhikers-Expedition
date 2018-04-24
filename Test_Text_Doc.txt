@@ -1,0 +1,2 @@
+
+This text file is a test text file to help anyone confused on how git works
