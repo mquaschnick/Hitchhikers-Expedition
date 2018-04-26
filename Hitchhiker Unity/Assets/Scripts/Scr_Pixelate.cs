@@ -8,15 +8,6 @@ public class Scr_Pixelate : MonoBehaviour {
 
     public Material effect;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     // source is all of the pixels coming in, destination is the material we're applying to
     private void OnRenderImage(RenderTexture source, RenderTexture destination) {
