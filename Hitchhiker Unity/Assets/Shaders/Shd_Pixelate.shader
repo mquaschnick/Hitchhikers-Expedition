@@ -55,8 +55,13 @@
 				uv.y /= _Rows;
 
 				fixed4 col = tex2D(_MainTex, uv);
-				// just invert the colors
-				// col.rgb = 1 - col.rgb;
+
+				col.r -= .2;
+
+				if (col.r < 0) {
+					col.r = 0;
+				}
+
 				return col;
 			}
 			ENDCG
