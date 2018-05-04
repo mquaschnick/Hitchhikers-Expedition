@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class InteractableEnvironment : MonoBehaviour {
 
-	//List of potential drops from interaction
-	[SerializeField]
+    //List of potential drops from interaction
+    [SerializeField]
 	protected GameObject[] itemDrops;
 
 	//If the object has been interacted with
-	protected bool used = false;
+	public bool used = false;
 
 	//Reference to the player object
 	[SerializeField]
-	private GameObject _player;
+	private GameObject SpawnPoint;
 
-	//Offset to place object above player model
-	public float yOffset = 2;
+    private GameObject _player;
+
+    //Offset to place object above player model
+    public float yOffset = 2;
 
 	//Delay in seconds before object is destroyed
 	public int delay = 5;
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Start() {
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+
+    // Update is called once per frame
+    void Update () {
 
 		//When mouse is pressed
 		if(Input.GetMouseButtonDown(0)){
@@ -38,19 +45,23 @@ public class InteractableEnvironment : MonoBehaviour {
 					//Mark as used
 					used = true;
 
+
+                    // REMEBER TO REMOVE after first playable
+                    _player.GetComponent<PlayerController_Master>().hitchhikingAllowed = true;
+
 					//Get random gameobject from potential drops list
 					GameObject drop = itemDrops[Random.Range(0, itemDrops.Length)];
 					//Get the player model location
-					Vector3 loc = _player.transform.position;
+					Vector3 loc = SpawnPoint.transform.position;
 					//Translate up by yOffset Units
 					loc.y += yOffset;
 
 					//Create game object above players head
-					GameObject instance = Instantiate(drop, loc, _player.transform.rotation);
+					GameObject instance = Instantiate(drop, loc, SpawnPoint.transform.rotation);
 
 					//Set the parent of the game object to the player
 					//This ensures the object remains above the players head
-					instance.transform.SetParent(_player.transform);
+					instance.transform.SetParent(SpawnPoint.transform);
 
 					//Destroy the gameobject after 5 seconds
 					Destroy(instance, delay);

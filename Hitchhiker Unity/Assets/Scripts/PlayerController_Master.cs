@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController_Master : MonoBehaviour {
 
 	// Public Variables
-	public float baseSpeed = 5.0f;
+	public float baseSpeed = 3.0f;
 	public float hitchHikingSpeedMod = 0.5f;
 	public float weather = 1.0f;
 	public float population = 0.5f;
