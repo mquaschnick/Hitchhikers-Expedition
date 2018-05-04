@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractableEnvironment : MonoBehaviour {
 
@@ -15,7 +16,8 @@ public class InteractableEnvironment : MonoBehaviour {
 	[SerializeField]
 	private GameObject SpawnPoint;
 
-    private GameObject _player;
+    public GameObject _player;
+    public GameObject _inventory;
 
     //Offset to place object above player model
     public float yOffset = 2;
@@ -25,6 +27,8 @@ public class InteractableEnvironment : MonoBehaviour {
 
     private void Start() {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _inventory = GameObject.FindGameObjectWithTag("Inventory");
+        //_inventory.SetActive(false);
     }
 
 
@@ -44,15 +48,23 @@ public class InteractableEnvironment : MonoBehaviour {
 				if (!used && hit.transform == transform) {
 					//Mark as used
 					used = true;
-
+                    Destroy(transform.GetChild(0).gameObject);
 
                     // REMEBER TO REMOVE after first playable
-                    _player.GetComponent<PlayerController_Master>().hitchhikingAllowed = true;
+                    //_player.GetComponent<PlayerController_Master>().hitchhikingAllowed = true;
 
-					//Get random gameobject from potential drops list
-					GameObject drop = itemDrops[Random.Range(0, itemDrops.Length)];
-					//Get the player model location
-					Vector3 loc = SpawnPoint.transform.position;
+                    //Get random gameobject from potential drops list
+                    GameObject drop = itemDrops[0];// itemDrops[Random.Range(0, itemDrops.Length)];
+                    //_inventory.GetComponent<Scr_Inventory>().inventory[0, 0] = drop;
+                    //_inventory.GetComponent<Scr_Inventory>().updateButtons();
+                    //_inventory.SetActive(true);
+                    _inventory.GetComponent<Scr_Inventory>().buttons[0, 0].transform.GetChild(0).GetComponent<Text>().text = "Berry";
+                    _inventory.GetComponent<Scr_Inventory>().buttons[0, 0].onClick.AddListener(drop.GetComponent<Scr_FoodItem>().consumeItem);
+                    //_inventory.SetActive(false);
+
+
+                    //Get the player model location
+                    Vector3 loc = SpawnPoint.transform.position;
 					//Translate up by yOffset Units
 					loc.y += yOffset;
 

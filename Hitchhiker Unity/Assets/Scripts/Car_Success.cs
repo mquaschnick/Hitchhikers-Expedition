@@ -13,7 +13,11 @@ public class Car_Success : MonoBehaviour {
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		startTime = Time.time;
+
+        // REMEBER TO REMOVE after first playable
+        player.GetComponent<PlayerController_Master>().hitchhikingAllowed = false;
+
+        startTime = Time.time;
 		delay *= 60;
 	}
 	
