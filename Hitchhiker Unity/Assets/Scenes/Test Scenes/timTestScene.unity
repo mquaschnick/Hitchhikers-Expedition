@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -211,9 +211,10 @@ GameObject:
   - component: {fileID: 409598653}
   - component: {fileID: 409598652}
   - component: {fileID: 409598651}
+  - component: {fileID: 409598656}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,6 +287,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &409598656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409598650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9e2a3f46e0b6b429e68092648d47ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 3
+  hitchHikingSpeedMod: 0.5
+  weather: 1
+  population: 0.5
+  isMoving: 0
+  isHitchhiking: 0
+  hitchhikingAllowed: 0
 --- !u!1001 &609606974
 Prefab:
   m_ObjectHideFlags: 0
@@ -523,6 +542,11 @@ Prefab:
       propertyPath: yOffset
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114976859806445636, guid: 9ad3a167d7b8c1b47a191fa58127048e,
+        type: 2}
+      propertyPath: SpawnPoint
+      value: 
+      objectReference: {fileID: 409598650}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ad3a167d7b8c1b47a191fa58127048e, type: 2}
   m_IsPrefabParent: 0

@@ -9,11 +9,15 @@ public class Car_Success : MonoBehaviour {
 	private GameObject player;
 	private float startTime;
 	private int count;
-	private int delay = 7;
+	private int delay = 5;
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		startTime = Time.time;
+
+        // REMEBER TO REMOVE after first playable
+        player.GetComponent<PlayerController_Master>().hitchhikingAllowed = false;
+
+        startTime = Time.time;
 		delay *= 60;
 	}
 	

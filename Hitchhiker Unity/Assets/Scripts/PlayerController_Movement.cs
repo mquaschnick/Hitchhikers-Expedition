@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController_Master))]
 public class PlayerController_Movement : MonoBehaviour {
 
 	private PlayerController_Master player;
 
-	// Private Variables
-	private float _moveMod = 0.0f;
+    public Sprite thumbsUpSprite;
+    public Sprite thumbsDownSprite;
+
+    // Private Variables
+    private float _moveMod = 0.0f;
 	private float _hitchHikeMod = 1.0f;
 
 	// Private Constants
@@ -26,19 +30,27 @@ public class PlayerController_Movement : MonoBehaviour {
 		transform.position -= new Vector3(player.baseSpeed * _moveMod * _hitchHikeMod * Time.deltaTime, 0.0f, 0.0f);
 	}
 
-	public void toggleMove() {
+	public void toggleMove(Text buttonText) {
 		player.isMoving = !player.isMoving;
-		if (player.isMoving)
-			_moveMod = MOVING;
-		else
-			_moveMod = STOPPED;
+        if (player.isMoving) {
+            _moveMod = MOVING;
+            buttonText.text = "Rest";
+        }
+        else {
+            _moveMod = STOPPED;
+            buttonText.text = "Walk";
+        }
 	}
 
-	public void toggleHitchHike() {
+	public void toggleHitchHike(Image buttonSprite) {
 		player.isHitchhiking = !player.isHitchhiking;
-		if (player.isHitchhiking)
-			_hitchHikeMod = player.hitchHikingSpeedMod;
-		else
-			_hitchHikeMod = NOTHITCHHIKING;
+        if (player.isHitchhiking) {
+            _hitchHikeMod = player.hitchHikingSpeedMod;
+            buttonSprite.sprite = thumbsUpSprite;
+        }
+        else {
+            _hitchHikeMod = NOTHITCHHIKING;
+            buttonSprite.sprite = thumbsDownSprite;
+        }
 	}
 }

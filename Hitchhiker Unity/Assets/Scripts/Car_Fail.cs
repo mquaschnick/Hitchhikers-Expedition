@@ -20,6 +20,6 @@ public class Car_Fail : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Destroy(gameObject);
+		Destroy(gameObject); 
 	}
 }
