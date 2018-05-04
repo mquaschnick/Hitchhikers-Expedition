@@ -1,20 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scr_Inventory : MonoBehaviour {
 
-    public string[][] inventory;
+    public GameObject[,] inventory;
+
+    public Button[,] buttons = new Button[5,5];
 
 
 	// Use this for initialization
 	void Start () {
 
-        inventory = new string[10][];
-
-        for (int i = 0; i < inventory.Length; i++) {
-            inventory[i] = new string[10];
+        inventory = new GameObject[5, 5];
+        
+        for (int i=0; i<5; i++) {
+            for (int j=0; j<5; j++) {
+                buttons[i, j] = transform.GetChild(i).GetChild(j).GetComponent<Button>();
+            }
         }
+
+        buttons[0, 0].transform.GetChild(0).GetComponent<Text>().text = "Hello";
 
 	}
 	
