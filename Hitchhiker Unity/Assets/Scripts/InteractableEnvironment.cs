@@ -34,7 +34,7 @@ public class InteractableEnvironment : MonoBehaviour {
 			//Check if hit by ray trace from camera to mouse
 			if (Physics.Raycast(ray, out hit)){
 				//Check if already been interacted with
-				if (!used) {
+				if (!used && hit.transform == transform) {
 					//Mark as used
 					used = true;
 
