@@ -20,6 +20,8 @@ public class Car_Fail : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Destroy(gameObject); 
+        if (other.gameObject.tag == "Despawner") {
+            Destroy(gameObject);
+        }
 	}
 }

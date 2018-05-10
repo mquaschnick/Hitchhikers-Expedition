@@ -171,3 +171,6 @@ MonoBehaviour:
   hungerFill: 0.2
   width: 1
   height: 1
+  itemName: Cherry
+  _player: {fileID: 0}
+  _inventory: {fileID: 0}

@@ -76,6 +76,23 @@ public class Scr_Inventory : MonoBehaviour {
 
     }
 
+    public void addFoodItem(GameObject item) {
+
+        Scr_FoodItem foodScript = item.GetComponent<Scr_FoodItem>();
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(buttons[i, j].transform.GetChild(0).GetComponent<Text>().text == "") {
+                    buttons[i, j].transform.GetChild(0).GetComponent<Text>().text = foodScript.itemName;
+                    buttons[i, j].onClick.AddListener(delegate { foodScript.consumeItem(i, j); });
+
+                    return;
+                }
+            }
+        }
+
+    }
+
 
     public void updateButtons() {
         //for (int i = 0; i < 5; i++) {

@@ -9,16 +9,14 @@ public class Car_Success : MonoBehaviour {
 	private GameObject player;
 	private float startTime;
 	private int count;
-	private int delay = 5;
+	private float delay = 5;
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-
-        // REMEBER TO REMOVE after first playable
-        player.GetComponent<PlayerController_Master>().hitchhikingAllowed = false;
+        //player.GetComponent<PlayerController_Movement>().getInCar();
 
         startTime = Time.time;
-		delay *= 60;
+        delay = Mathf.Floor(Random.Range(300, 600));
 	}
 	
 	void Update () {
@@ -28,11 +26,23 @@ public class Car_Success : MonoBehaviour {
         float fracJourney = distCovered / journeyLength;
 		transform.position = Vector3.Lerp(transform.position, playerVector, fracJourney);
 		count++;
-		if (count > delay)
-			SceneManager.LoadScene("Success");
+        if (count > delay) {
+            player.GetComponent<PlayerController_Movement>().getOutCar();
+            player.transform.SetParent(null);
+            Destroy(gameObject);
+        }
     }
 
 	void OnTriggerEnter(Collider other) {
-		Destroy(gameObject);
+
+        if (other.gameObject.tag == "Player") {
+            player.GetComponent<PlayerController_Movement>().getInCar();
+            player.transform.SetParent(transform);
+        }
+        else if (other.gameObject.tag == "Despawner") {
+            Destroy(gameObject);
+        }
 	}
+
+
 }
