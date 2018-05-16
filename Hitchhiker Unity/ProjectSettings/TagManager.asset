@@ -10,6 +10,7 @@ TagManager:
   - WalkButton
   - EndOfLevel
   - Despawner
+  - Car
   layers:
   - Default
   - TransparentFX
