@@ -6,7 +6,7 @@ using UnityEngine;
 public class Reset : MonoBehaviour {
 
 	public void LoadScene() {
-		  SceneManager.LoadScene("PreAlphaEnvironment");
+		  SceneManager.LoadScene("FirstPlayableEnvironment");
 	}
 
 }
