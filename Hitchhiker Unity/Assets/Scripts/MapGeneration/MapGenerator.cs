@@ -8,19 +8,25 @@ public class MapGenerator : MonoBehaviour {
 
 	[Header("Generation")]
 	public int masterSeed = 0;
-	public int mapLength;
+
+    [Header("Balancing")]
+    public int mapLength;
     [Range(0.0f, 1.0f)]
     public float farmPercentage = 0.3f;
+    public int puddlePerTile = 2;
 
     //[Range(0,1)]
     //public float buildingPercent;
 
     [Space(10)]
 
-    [Header("Prefabs")]
+    [Header("Tiles")]
     public GameObject[] tilePopVillage;
     public GameObject[] tileRuralFarm;
     public GameObject[] tileRuralForest;
+
+    [Header("Objects")]
+    public GameObject puddle;
 
     private TileType[] tileMap;
 
@@ -84,8 +90,8 @@ public class MapGenerator : MonoBehaviour {
 		villageHolder.parent = transform;
 
         //Set first and last tile as the populated village tiles
-        tileMap[0] = TileType.EastPopVillage;
-        tileMap[mapLength - 1] = TileType.EastPopVillage;
+        tileMap[2] = TileType.EastPopVillage;
+        tileMap[mapLength - 3] = TileType.EastPopVillage;
 
 		for (int x = 0; x < mapLength; x++) 
 		{
@@ -93,7 +99,18 @@ public class MapGenerator : MonoBehaviour {
 			GameObject newTile = Instantiate (GetPrefabOfTileType(x), tilePosition, Quaternion.identity) as GameObject;
 			newTile.transform.parent = villageHolder;
 		}
-	}
+
+        //Place Puddles
+        int puddleCount = puddlePerTile * mapLength;
+        float minPlacement = 0f;
+        float maxPlacement = CoordToPosition(mapLength).x;
+        for (int x = 0; x < puddleCount; x++)
+        {
+            Vector3 puddlePosition = new Vector3 (Random.Range(minPlacement, maxPlacement), 0.07f, 0.31f);
+            GameObject newPuddle = Instantiate(puddle, puddlePosition, Quaternion.identity) as GameObject;
+            newPuddle.transform.parent = villageHolder;
+        }
+    }
 
     GameObject GetPrefabOfTileType (int x)
     {
