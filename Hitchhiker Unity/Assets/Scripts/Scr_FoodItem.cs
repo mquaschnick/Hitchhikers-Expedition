@@ -8,6 +8,10 @@ public class Scr_FoodItem : MonoBehaviour {
     public float hungerFill;
     public int width;
     public int height;
+    public string itemName;
+
+    //public int positionX = 0;
+    //public int positionY = 0;
 
     public GameObject _player;
     public GameObject _inventory;
@@ -17,15 +21,19 @@ public class Scr_FoodItem : MonoBehaviour {
         _inventory = GameObject.FindGameObjectWithTag("Inventory");
     }
 	
-    public void consumeItem() {
+    public void consumeItem(int startX, int startY) {
+
         _player = GameObject.FindGameObjectWithTag("Player");
         _inventory = GameObject.FindGameObjectWithTag("Inventory");
 
         _player.GetComponent<PlayerController_Statuses>().updateHunger(hungerFill);
-        _inventory.GetComponent<Scr_Inventory>().buttons[0, 0].transform.GetChild(0).GetComponent<Text>().text = "";
-        _inventory.GetComponent<Scr_Inventory>().buttons[0, 0].onClick.RemoveAllListeners();
 
-        // REMEBER TO REMOVE after first playable
-        _player.GetComponent<PlayerController_Master>().hitchhikingAllowed = true;
+        for (int i = startX; i < startX + width; i++) {
+            for (int j = startY; j < startY + height; j++) {
+                _inventory.GetComponent<Scr_Inventory>().buttons[i, j].transform.GetChild(0).GetComponent<Text>().text = "";
+                _inventory.GetComponent<Scr_Inventory>().buttons[i, j].onClick.RemoveAllListeners();
+            }
+        }
+
     }
 }
