@@ -40,7 +40,10 @@ public class Event_Twist : MonoBehaviour {
     }
 
     public void TwistYN () {
-		string message = "You got distracted thinking about the multiple applications your [YOUR NOUN] could have and tripped. A twisted ankle is not great but at least you didn’t break anything. Would you like to rest for [SET AMOUT OF TIME]?";
+
+        // "You twisted your already twisted ankle. Well...now it's broken. So good luck with that."
+        // "That old quidditch injury from college is acting up again. The pain is manageable though."
+		string message = "You got distracted thinking about the multiple applications of your [YOUR NOUN] and tripped. A twisted ankle is not great but at least you didn’t break anything. Would you like to rest for [SET AMOUT OF TIME]?";
         eventPanel.Choice (message, YesFunction, NoFunction);
     }
 
