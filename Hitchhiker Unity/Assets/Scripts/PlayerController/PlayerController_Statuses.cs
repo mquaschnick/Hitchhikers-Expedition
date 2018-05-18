@@ -10,6 +10,9 @@ public class PlayerController_Statuses : MonoBehaviour {
 
     public Slider hungerBar;
     public Slider thirstBar;
+    public Slider D34THBar;
+
+    public GameObject D34DScreen;
 
     public float tickTime = 10.0f;
     private float _tickTime;
@@ -25,6 +28,7 @@ public class PlayerController_Statuses : MonoBehaviour {
         if (Time.time > _tickTime) {
             updateHunger(player.starveRate);
             updateThirst(player.thirstRate);
+            updateD34TH(player.D34THRate);
 
             _tickTime = Time.time + tickTime;
         }
@@ -52,6 +56,33 @@ public class PlayerController_Statuses : MonoBehaviour {
             player.thirst = 0;
         }
         thirstBar.value = player.thirst;
+    }
+
+    public void updateD34TH(float amount) {
+
+        if (player.thirst <= .2f) {
+            player.D34TH += amount;
+        }
+        if (player.hunger <= .2f) {
+            player.D34TH += amount;
+        }
+
+        if (player.thirst >= .8f) {
+            player.D34TH -= amount;
+        }
+        if (player.hunger >= .8f) {
+            player.D34TH -= amount;
+        }
+        
+        if (player.D34TH > 1) {
+            player.D34TH = 1;
+        }
+        
+        D34THBar.value = player.D34TH;
+        if (player.D34TH < 0) {
+           Time.timeScale = 0;
+           D34DScreen.SetActive(true);
+        }
     }
 
 }
