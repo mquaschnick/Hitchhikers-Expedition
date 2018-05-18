@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1006370519229520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -100, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4267938870193508}
@@ -422,6 +422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hungerBar: {fileID: 0}
   thirstBar: {fileID: 0}
+  D34THBar: {fileID: 0}
+  D34DScreen: {fileID: 0}
   tickTime: 10
 --- !u!114 &114150206720049718
 MonoBehaviour:
@@ -509,6 +511,8 @@ MonoBehaviour:
   starveRate: -0.01
   thirst: 0.6
   thirstRate: -0.01
+  D34TH: 1
+  D34THRate: 0
   weather: 0.85
   population: 0.5
   isMoving: 0

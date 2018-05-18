@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class Scr_FoodItem : MonoBehaviour {
 
     public float hungerFill;
+    public float thirstFill;
     public int width;
     public int height;
     public string itemName;
+    public Sprite image;
 
     //public int positionX = 0;
     //public int positionY = 0;
@@ -27,10 +29,12 @@ public class Scr_FoodItem : MonoBehaviour {
         _inventory = GameObject.FindGameObjectWithTag("Inventory");
 
         _player.GetComponent<PlayerController_Statuses>().updateHunger(hungerFill);
+        _player.GetComponent<PlayerController_Statuses>().updateThirst(thirstFill);
 
         for (int i = startX; i < startX + width; i++) {
             for (int j = startY; j < startY + height; j++) {
-                _inventory.GetComponent<Scr_Inventory>().buttons[i, j].transform.GetChild(0).GetComponent<Text>().text = "";
+                _inventory.GetComponent<Scr_Inventory>().buttons[i, j].GetComponent<Image>().sprite = null;
+                _inventory.GetComponent<Scr_Inventory>().buttons[i, j].GetComponent<Image>().enabled = false;
                 _inventory.GetComponent<Scr_Inventory>().buttons[i, j].onClick.RemoveAllListeners();
             }
         }
