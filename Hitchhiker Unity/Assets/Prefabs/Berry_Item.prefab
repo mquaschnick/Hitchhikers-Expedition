@@ -169,8 +169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerFill: 0.2
+  thirstFill: 0.1
   width: 1
   height: 1
   itemName: Cherry
+  image: {fileID: 21300000, guid: efbcbbe5f0302f2418f438d64f56351a, type: 3}
   _player: {fileID: 0}
   _inventory: {fileID: 0}
