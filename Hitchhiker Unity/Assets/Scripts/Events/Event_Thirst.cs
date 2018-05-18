@@ -32,7 +32,7 @@ public class Event_Thirst : MonoBehaviour
 
     private void Update()
     {
-        if (player.isMoving && !player.isInCar)
+        if (player.isMoving && !player.isInCar && player.thirst <= .05)
         {
 
             float chance = Random.Range(0.0f, 100.0f);
@@ -59,14 +59,12 @@ public class Event_Thirst : MonoBehaviour
     void YesFunction()
     {
         eventDisplayManager.DisplayMessage("Ahhhh cool, refreshing, liquid.");
-        player.GetComponent<PlayerController_Statuses>().updateHunger(-0.2f);
         Time.timeScale = 1;
     }
 
     void NoFunction()
     {
         eventDisplayManager.DisplayMessage("The thirst remains strong with this one.");
-        player.injuredAffect = 0.5f;
         Time.timeScale = 1;
     }
 }

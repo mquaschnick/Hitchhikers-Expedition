@@ -11,8 +11,11 @@ public class PlayerController_Movement : MonoBehaviour {
     public Sprite thumbsUpSprite;
     public Sprite thumbsDownSprite;
 
-    private Image buttonSprite;
-    private Text buttonText;
+    public Sprite walkingSprite;
+    public Sprite restingSprite;
+
+    private Image thumbSprite;
+    private Image walkSprite;
 
     // Private Variables
     private float _moveMod = 0.0f;
@@ -27,8 +30,8 @@ public class PlayerController_Movement : MonoBehaviour {
 		player = GetComponent<PlayerController_Master>();
 		player.isMoving = false;
 		player.isHitchhiking = false;
-        buttonSprite = GameObject.FindGameObjectWithTag("ThumbButton").GetComponent<Image>();
-        buttonText = GameObject.FindGameObjectWithTag("WalkButton").transform.GetChild(0).GetComponent<Text>();
+        thumbSprite = GameObject.FindGameObjectWithTag("ThumbButton").GetComponent<Image>();
+        walkSprite = GameObject.FindGameObjectWithTag("WalkButton").GetComponent<Image>();
     }
 
 	void Update () {
@@ -39,11 +42,11 @@ public class PlayerController_Movement : MonoBehaviour {
 		player.isMoving = !player.isMoving;
         if (player.isMoving && !player.isInCar) {
             _moveMod = MOVING;
-            buttonText.text = "Rest";
+            walkSprite.sprite = walkingSprite;
         }
         else {
             _moveMod = STOPPED;
-            buttonText.text = "Walk";
+            walkSprite.sprite = restingSprite;
         }
 	}
 
@@ -51,11 +54,11 @@ public class PlayerController_Movement : MonoBehaviour {
 		player.isHitchhiking = !player.isHitchhiking;
         if (player.isHitchhiking && !player.isInCar) {
             _hitchHikeMod = player.hitchHikingSpeedMod;
-            buttonSprite.sprite = thumbsUpSprite;
+            thumbSprite.sprite = thumbsUpSprite;
         }
         else {
             _hitchHikeMod = NOTHITCHHIKING;
-            buttonSprite.sprite = thumbsDownSprite;
+            thumbSprite.sprite = thumbsDownSprite;
         }
 	}
 
@@ -64,11 +67,11 @@ public class PlayerController_Movement : MonoBehaviour {
 
         player.isHitchhiking = false;
         _hitchHikeMod = NOTHITCHHIKING;
-        buttonSprite.sprite = thumbsDownSprite;
+        thumbSprite.sprite = thumbsDownSprite;
 
         player.isMoving = false;
         _moveMod = STOPPED;
-        buttonText.text = "Walk";
+        walkSprite.sprite = restingSprite;
     }
 
     public void getOutCar() {

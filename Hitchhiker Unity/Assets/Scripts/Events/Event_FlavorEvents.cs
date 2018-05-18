@@ -32,7 +32,7 @@ public class Event_FlavorEvents : MonoBehaviour
 
     private void Update()
     {
-        if (player.isMoving && !player.isInCar)
+        if (!player.isMoving && !player.isInCar)
         {
 
             float chance = Random.Range(0.0f, 100.0f);
@@ -56,14 +56,12 @@ public class Event_FlavorEvents : MonoBehaviour
     void YesFunction()
     {
         eventDisplayManager.DisplayMessage("That's...not...great.");
-        player.GetComponent<PlayerController_Statuses>().updateHunger(-0.2f);
         Time.timeScale = 1;
     }
 
     void NoFunction()
     {
         eventDisplayManager.DisplayMessage("They'll all fail without my genius.");
-        player.injuredAffect = 0.5f;
         Time.timeScale = 1;
     }
 }

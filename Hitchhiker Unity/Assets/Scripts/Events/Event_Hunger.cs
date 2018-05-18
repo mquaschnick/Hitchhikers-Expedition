@@ -32,7 +32,7 @@ public class Event_Hunger : MonoBehaviour
 
     private void Update()
     {
-        if (player.isMoving && !player.isInCar)
+        if (player.isMoving && !player.isInCar && player.hunger <= .05)
         {
 
             float chance = Random.Range(0.0f, 100.0f);

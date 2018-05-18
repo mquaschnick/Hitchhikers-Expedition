@@ -57,14 +57,12 @@ public class Event_StateEntrances : MonoBehaviour
     void YesFunction()
     {
         eventDisplayManager.DisplayMessage("Nothing a little snack can't cure.");
-        player.GetComponent<PlayerController_Statuses>().updateHunger(-0.2f);
         Time.timeScale = 1;
     }
 
     void NoFunction()
     {
         eventDisplayManager.DisplayMessage("*stomach growls angrily in protest*");
-        player.injuredAffect = 0.5f;
         Time.timeScale = 1;
     }
 }

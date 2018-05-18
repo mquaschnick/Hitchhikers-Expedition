@@ -104,11 +104,11 @@ public class Scr_Inventory : MonoBehaviour {
                     }
 
                     if (canPlace) {
-                        for (int k = i; k < i + foodScript.width; k++) {
-                            for (int l = j; l < j + foodScript.height; l++) {
-                                buttons[l, k].GetComponent<Image>().enabled = true;
-                                buttons[l, k].GetComponent<Image>().sprite = foodScript.image;
-                                buttons[l, k].onClick.AddListener(delegate { foodScript.consumeItem(i, j); });
+                        for (int m = i; m < i + foodScript.width; m++) {
+                            for (int n = j; n < j + foodScript.height; n++) {
+                                buttons[m, n].GetComponent<Image>().enabled = true;
+                                buttons[m, n].GetComponent<Image>().sprite = foodScript.image;
+                                buttons[m, n].onClick.AddListener(delegate { foodScript.consumeItem(m - foodScript.width, n - foodScript.height); });
                             }
                         }
 
@@ -138,15 +138,16 @@ public class Scr_Inventory : MonoBehaviour {
                     }
 
                     if (canPlace) {
-                        for (int k = i; k < i + clothesScript.width; k++) {
-                            for (int l = j; l < j + clothesScript.height; l++) {
-                                if (k == i && l == j) {
-                                    buttons[l, k].GetComponent<Image>().enabled = true;
-                                    buttons[l, k].GetComponent<Image>().sprite = clothesScript.image;
-                                    buttons[l, k].transform.localScale = new Vector3(clothesScript.width, clothesScript.height, 1);
-                                    buttons[l, k].onClick.AddListener(delegate { clothesScript.equipItem(i, j); });
+                        for (int m = i; m < i + clothesScript.width; m++) {
+                            for (int n = j; n < j + clothesScript.height; n++) {
+                                if (m == i && n == j) {
+                                    buttons[m, n].GetComponent<Image>().enabled = true;
+                                    buttons[m, n].GetComponent<Image>().sprite = clothesScript.image;
+                                    buttons[m, n].transform.localScale = new Vector3(clothesScript.width, clothesScript.height, 1);
+                                    buttons[m, n].onClick.AddListener(delegate { clothesScript.equipItem(m - clothesScript.width, n - clothesScript.height); });
                                 } else {
-                                    buttons[l, k].GetComponent<Image>().sprite = clothesScript.image;
+                                    buttons[m, n].GetComponent<Image>().sprite = clothesScript.image;
+                                    //buttons[m, n].GetComponent<Image>().enabled = true;
                                 }
                             }
                         }
