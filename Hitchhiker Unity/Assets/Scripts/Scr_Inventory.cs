@@ -8,20 +8,27 @@ public class Scr_Inventory : MonoBehaviour {
     //public GameObject[,] inventory = new GameObject[5, 5];
 
     public Button[,] buttons = new Button[5,5];
+    public GameObject backpack;
 
     public bool isOpen = false;
+
+    public GameObject startingItem;
 
 
 	// Use this for initialization
 	void Start () {
 
         //inventory = new GameObject[5, 5];
+
+        backpack = transform.GetChild(0).gameObject;
         
         for (int i=0; i<5; i++) {
             for (int j=0; j<5; j++) {
-                buttons[i, j] = transform.GetChild(i).GetChild(j).GetComponent<Button>();
+                buttons[i, j] = transform.GetChild(i+1).GetChild(j).GetComponent<Button>();
             }
         }
+
+        addClothingItem(startingItem);
 
         closeInventory();
 
@@ -48,6 +55,7 @@ public class Scr_Inventory : MonoBehaviour {
 
     public void toggleInventory() {
         isOpen = !isOpen;
+        backpack.SetActive(isOpen);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 buttons[i, j].gameObject.SetActive(isOpen);
@@ -58,6 +66,7 @@ public class Scr_Inventory : MonoBehaviour {
 
     public void closeInventory() {
         isOpen = false;
+        backpack.SetActive(isOpen);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 buttons[i, j].gameObject.SetActive(isOpen);
@@ -68,9 +77,113 @@ public class Scr_Inventory : MonoBehaviour {
 
     public void openInventory() {
         isOpen = true;
+        backpack.SetActive(isOpen);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 buttons[i, j].gameObject.SetActive(isOpen);
+            }
+        }
+
+    }
+
+    public void addFoodItem(GameObject item) {
+
+        Scr_FoodItem foodScript = item.GetComponent<Scr_FoodItem>();
+        bool canPlace = true;
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(buttons[i, j].GetComponent<Image>().sprite == null) {
+                    canPlace = true;
+                    for (int k = i; k < i + foodScript.width; k++) {
+                        for (int l = j; l < j + foodScript.height; l++) {
+                            if(buttons[k, l].GetComponent<Image>().sprite != null) {
+                                canPlace = false;
+                            }
+                        }
+                    }
+
+                    if (canPlace) {
+                        for (int m = i; m < i + foodScript.width; m++) {
+                            for (int n = j; n < j + foodScript.height; n++) {
+                                buttons[m, n].GetComponent<Image>().enabled = true;
+                                buttons[m, n].GetComponent<Image>().sprite = foodScript.image;
+                                buttons[m, n].onClick.AddListener(delegate { foodScript.consumeItem(m - foodScript.width, n - foodScript.height); });
+                            }
+                        }
+
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void addClothingItem(GameObject item) {
+
+        Scr_ClothingItem clothesScript = item.GetComponent<Scr_ClothingItem>();
+        bool canPlace = true;
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (buttons[i, j].GetComponent<Image>().sprite == null) {
+                    canPlace = true;
+                    for (int k = i; k < i + clothesScript.width; k++) {
+                        for (int l = j; l < j + clothesScript.height; l++) {
+                            if (buttons[k, l].GetComponent<Image>().sprite != null) {
+                                canPlace = false;
+                            }
+                        }
+                    }
+
+                    if (canPlace) {
+                        for (int m = i; m < i + clothesScript.width; m++) {
+                            for (int n = j; n < j + clothesScript.height; n++) {
+                                if (m == i && n == j) {
+                                    buttons[m, n].GetComponent<Image>().enabled = true;
+                                    buttons[m, n].GetComponent<Image>().sprite = clothesScript.image;
+                                    buttons[m, n].transform.localScale = new Vector3(clothesScript.width, clothesScript.height, 1);
+                                    buttons[m, n].onClick.AddListener(delegate { clothesScript.equipItem(m - clothesScript.width, n - clothesScript.height); });
+                                } else {
+                                    buttons[m, n].GetComponent<Image>().sprite = clothesScript.image;
+                                    //buttons[m, n].GetComponent<Image>().enabled = true;
+                                }
+                            }
+                        }
+
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void moveItem(int startX, int startY) {
+
+        //Scr_FoodItem foodScript = item.GetComponent<Scr_FoodItem>();
+        bool canPlace = true;
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (buttons[i, j].transform.GetChild(0).GetComponent<Text>().text == "") {
+                    canPlace = true;
+                    //for (int k = i; k < i + foodScript.width; k++) {
+                   //     for (int l = j; l < j + foodScript.height; l++) {
+                    //        if (buttons[k, l].transform.GetChild(0).GetComponent<Text>().text != "") {
+                    //            canPlace = false;
+                   //         }
+                    //    }
+                    //}
+
+                    if (canPlace) {
+                        //buttons[i, j].transform.GetChild(0).GetComponent<Text>().text = foodScript.itemName;
+                        //buttons[i, j].onClick.AddListener(delegate { foodScript.consumeItem(i, j); });
+
+                        return;
+                    }
+                }
             }
         }
 

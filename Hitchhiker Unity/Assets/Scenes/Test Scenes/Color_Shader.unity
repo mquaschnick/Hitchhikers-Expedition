@@ -442,7 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da54ab8c5fb10ca40937f393950d80b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  precision: 0.1
+  effect: {fileID: 2100000, guid: 91ea17ee26caf424aa4012e064a4afe2, type: 2}
+  precision: 0.2
   In0: {r: 1, g: 1, b: 1, a: 1}
   In1: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   In2: {r: 0, g: 0, b: 0, a: 1}

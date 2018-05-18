@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Inventory
   - Item
+  - ThumbButton
+  - WalkButton
+  - EndOfLevel
+  - Despawner
+  - Car
   layers:
   - Default
   - TransparentFX
