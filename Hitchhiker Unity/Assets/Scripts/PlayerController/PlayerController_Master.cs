@@ -15,6 +15,8 @@ public class PlayerController_Master : MonoBehaviour {
     public float starveRate = -0.0001f;
 	public float thirst = 0.6f; // 0 dehydrated, 1 full
 	public float thirstRate = -0.0001f;
+    public float D34TH = 1.0f; // 0 starving, 1 full
+    public float D34THRate = -0.0002f;
 	public float weather = 1.0f;
 	public float population = 0.5f;
 	public bool isMoving;
