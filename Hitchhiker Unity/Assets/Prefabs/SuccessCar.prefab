@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4744952103073470}
   - component: {fileID: 114676758323856670}
   - component: {fileID: 65160479478208278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SuccessCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65008043898676038}
   - component: {fileID: 54741483149170558}
   - component: {fileID: 82048475656764798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FailCar
   m_TagString: Car
   m_Icon: {fileID: 0}

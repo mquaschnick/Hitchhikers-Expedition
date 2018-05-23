@@ -11,6 +11,7 @@ TagManager:
   - EndOfLevel
   - Despawner
   - Car
+  - Splash
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Car
+  - Player
+  - Interactable
   - 
   - 
   - 
