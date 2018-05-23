@@ -11,6 +11,8 @@ TagManager:
   - EndOfLevel
   - Despawner
   - Car
+  - EventManager
+  - CarSuccess
   layers:
   - Default
   - TransparentFX
