@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114154138603909468}
   - component: {fileID: 114945751177040312}
   - component: {fileID: 114045859043525294}
+  - component: {fileID: 114241158299182466}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -493,6 +494,17 @@ MonoBehaviour:
   spawnLeft: {fileID: 1309498568043640}
   carFail: {fileID: 1586114107071302, guid: 088ac18807daf79428be7cc60f2636a7, type: 2}
   carSuccess: {fileID: 1551024499789230, guid: c5e24f5f2d4f1e341915e1ff379782bd, type: 2}
+--- !u!114 &114241158299182466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1006370519229520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0ee8188437ac344875b9fd3098af35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114469802686650646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -541,8 +553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f474e0a7e31512439b8bbf5c6eb7fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thumbsUpSprite: {fileID: 21300000, guid: 34b207151c92d1846860f4add5e38447, type: 3}
-  thumbsDownSprite: {fileID: 21300000, guid: e1931beca772ba745a54e514ee9c8d69, type: 3}
+  thumbsUpSprite: {fileID: 21300000, guid: 8301d95813149764cbcee2bc8d1c0640, type: 3}
+  thumbsDownSprite: {fileID: 21300000, guid: 64266e5d3a60bb54c94f8fc83fe3f3bd, type: 3}
+  walkingSprite: {fileID: 21300000, guid: 2371d45de9774934888d4175a16261e9, type: 3}
+  restingSprite: {fileID: 21300000, guid: 4bd38c84d08817c4ba74433466aac46a, type: 3}
 --- !u!124 &124110670650670564
 Behaviour:
   m_ObjectHideFlags: 1
