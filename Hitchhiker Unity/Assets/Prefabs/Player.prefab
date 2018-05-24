@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114945751177040312}
   - component: {fileID: 114045859043525294}
   - component: {fileID: 114241158299182466}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ MonoBehaviour:
   thirst: 0.6
   thirstRate: -0.01
   D34TH: 1
-  D34THRate: 0
+  D34THRate: -0.1
   weather: 0.85
   population: 0.5
   isMoving: 0

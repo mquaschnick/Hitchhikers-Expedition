@@ -85,4 +85,19 @@ public class PlayerController_Statuses : MonoBehaviour {
         }
     }
 
+    public void damageDeath(float amount) {
+
+        player.D34TH += amount;
+
+        if (player.D34TH > 1) {
+            player.D34TH = 1;
+        }
+
+        D34THBar.value = player.D34TH;
+        if (player.D34TH < 0) {
+            Time.timeScale = 0;
+            D34DScreen.SetActive(true);
+        }
+    }
+
 }

@@ -13,6 +13,7 @@ TagManager:
   - Car
   - EventManager
   - CarSuccess
+  - Splash
   layers:
   - Default
   - TransparentFX
@@ -22,9 +23,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Car
+  - Player
+  - Interactable
   - 
   - 
   - 
