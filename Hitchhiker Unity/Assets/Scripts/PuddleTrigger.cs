@@ -35,7 +35,7 @@ public class PuddleTrigger : MonoBehaviour {
             float distanceFromPlayer = PlayerController_Master.playerBody.transform.position.x - transform.position.x;
 
             if(Mathf.Abs(distanceFromPlayer) <= splashRange && Mathf.Abs(distanceFromPlayer) >= 0) {
-                playerStatus.damageDeath(-0.1f);
+                playerStatus.damageDeath(-0.3f);
             }
           
         }
