@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController_Master))]
 public class PlayerController_Movement : MonoBehaviour {
+    public Animator[] characterAnimators;
 
 	private PlayerController_Master player;
 
@@ -43,10 +44,18 @@ public class PlayerController_Movement : MonoBehaviour {
         if (player.isMoving && !player.isInCar) {
             _moveMod = MOVING;
             walkSprite.sprite = walkingSprite;
+            foreach(Animator anim in characterAnimators)
+            {
+                anim.SetInteger("AnimState", 1);
+            }
         }
         else {
             _moveMod = STOPPED;
             walkSprite.sprite = restingSprite;
+            foreach (Animator anim in characterAnimators)
+            {
+                anim.SetInteger("AnimState", 0);
+            }
         }
 	}
 
@@ -55,10 +64,19 @@ public class PlayerController_Movement : MonoBehaviour {
         if (player.isHitchhiking && !player.isInCar) {
             _hitchHikeMod = player.hitchHikingSpeedMod;
             thumbSprite.sprite = thumbsUpSprite;
+
+            foreach (Animator anim in characterAnimators)
+            {
+                anim.SetBool("Hitchhike", true);
+            }
         }
         else {
             _hitchHikeMod = NOTHITCHHIKING;
             thumbSprite.sprite = thumbsDownSprite;
+            foreach (Animator anim in characterAnimators)
+            {
+                anim.SetBool("Hitchhike", false);
+            }
         }
 	}
 
@@ -72,9 +90,18 @@ public class PlayerController_Movement : MonoBehaviour {
         player.isMoving = false;
         _moveMod = STOPPED;
         walkSprite.sprite = restingSprite;
+
+        PlayerController_Master.playerBody.SetActive(false);
+
+        foreach (Animator anim in characterAnimators)
+        {
+            anim.SetBool("Hitchhike", false);
+            anim.SetInteger("AnimState", 0);
+        }
     }
 
     public void getOutCar() {
         player.isInCar = false;
+        PlayerController_Master.playerBody.SetActive(true);
     }
 }

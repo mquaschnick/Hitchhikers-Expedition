@@ -4,6 +4,8 @@ using System.Collections;
 
 public class EventDisplayManager : MonoBehaviour {
 
+    public static EventDisplayManager instance;
+
     public Text message;
 	public Image back;
     public float displayTime;
@@ -12,7 +14,12 @@ public class EventDisplayManager : MonoBehaviour {
     private IEnumerator fadeAlpha;
     
     private static EventDisplayManager eventDisplayManager;
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public static EventDisplayManager Instance () {
         if (!eventDisplayManager) {
             eventDisplayManager = FindObjectOfType(typeof (EventDisplayManager)) as EventDisplayManager;
