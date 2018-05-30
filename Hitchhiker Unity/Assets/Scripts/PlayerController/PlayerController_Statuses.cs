@@ -13,6 +13,7 @@ public class PlayerController_Statuses : MonoBehaviour {
     public Slider D34THBar;
 
     public GameObject D34DScreen;
+    public GameObject dirtyObjects;
 
     public float tickTime = 10.0f;
     private float _tickTime;
@@ -98,6 +99,11 @@ public class PlayerController_Statuses : MonoBehaviour {
             Time.timeScale = 0;
             D34DScreen.SetActive(true);
         }
+    }
+    public void setDirty(bool isDirty)
+    {
+        dirtyObjects.SetActive(isDirty);
+        player.isDirty = isDirty;
     }
 
 }

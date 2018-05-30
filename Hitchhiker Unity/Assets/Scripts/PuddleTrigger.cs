@@ -8,7 +8,7 @@ public class PuddleTrigger : MonoBehaviour {
     private AudioSource splashAudio;
     private PlayerController_Statuses playerStatus;
 
-    private float splashRange = 2f;
+    private float splashRange = 1.7f;
 
 	// Use this for initialization
 	void Start () {
@@ -24,22 +24,29 @@ public class PuddleTrigger : MonoBehaviour {
             splashParticles.Emit(50);
             splashAudio.Play();
 
-                        //Detect if player is within range apply GetWet function
-            //Something like this depending on how we handle static player to get access to the player position and 
-
-            /*
-             if (splashRange > Mathf.Abs (Player.instance.gameObject.transform.position.x - transform.position.x)
-                PlayerInventory.instance.WetClothes();
-             */
-
             float distanceFromPlayer = PlayerController_Master.playerBody.transform.position.x - transform.position.x;
 
-            if(Mathf.Abs(distanceFromPlayer) <= splashRange && Mathf.Abs(distanceFromPlayer) >= 0) {
-                playerStatus.damageDeath(-0.3f);
+            if (Mathf.Abs(distanceFromPlayer) <= 10f)
+            {
+                StartCoroutine(WaitAndSplash(0.7f));
             }
-          
+            
         }
 
+    }
+    IEnumerator WaitAndSplash(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        float distanceFromPlayer = PlayerController_Master.playerBody.transform.position.x - transform.position.x;
+
+        if (Mathf.Abs(distanceFromPlayer) <= splashRange)
+        {
+            playerStatus.damageDeath(-0.2f);
+            playerStatus.setDirty(true);
+            EventDisplayManager.instance.DisplayMessage("Damn! My clothes are ruined.");
+
+        }
     }
 
 }

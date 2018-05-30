@@ -22,6 +22,7 @@ public class PlayerController_Master : MonoBehaviour {
 	public bool isMoving;
 	public bool isHitchhiking;
     public bool isInCar;
+    public bool isDirty;
 
     private void Awake() {
         playerBody = transform.GetChild(1).gameObject;
