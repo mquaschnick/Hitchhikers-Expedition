@@ -42,8 +42,8 @@ public class PuddleTrigger : MonoBehaviour {
 
         if (Mathf.Abs(distanceFromPlayer) <= splashRange)
         {
-            playerStatus.damageDeath(-0.2f);
-            playerStatus.setDirty(true);
+            PlayerController_Statuses.instance.damageDeath(-0.2f);
+            PlayerController_Statuses.instance.setDirty(true);
             EventDisplayManager.instance.DisplayMessage("Damn! My clothes are ruined.");
 
         }

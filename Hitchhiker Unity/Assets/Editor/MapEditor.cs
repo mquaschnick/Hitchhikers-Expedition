@@ -17,14 +17,18 @@ public class MapEditor : Editor
 			village.GenerateVillage (); //whenever village is selected it will be constantly regenerating itself
         */
 
-		if (GUILayout.Button ("Randomize & Generate")) 
+		if (GUILayout.Button ("Randomize Seed")) 
 		{
-            village.RandomizeGenerate();
+            village.RandomizeSeed();
+        }
+        if (GUILayout.Button("Generate Start"))
+        {
+            village.PlaceStartTiles();
         }
 
-		if (GUILayout.Button ("Generate")) 
+        if (GUILayout.Button ("Generate Whole")) 
 		{
-			village.GenerateMap ();
+			village.PlaceAllTiles ();
 		}
 	}
 }
