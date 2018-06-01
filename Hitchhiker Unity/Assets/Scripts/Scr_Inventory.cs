@@ -14,6 +14,8 @@ public class Scr_Inventory : MonoBehaviour {
 
     public GameObject startingItem;
 
+    public float money;
+
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +23,7 @@ public class Scr_Inventory : MonoBehaviour {
         //inventory = new GameObject[5, 5];
 
         backpack = transform.GetChild(0).gameObject;
+        money = 20.00f;
         
         for (int i=0; i<5; i++) {
             for (int j=0; j<5; j++) {
@@ -42,7 +45,7 @@ public class Scr_Inventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        
         //if (inventory[0, 0]) {
         //    buttons[0, 0].transform.GetChild(0).GetComponent<Text>().text = inventory[0, 0].tag;
         //}
@@ -158,6 +161,10 @@ public class Scr_Inventory : MonoBehaviour {
             }
         }
 
+    }
+
+    public void addMoney(float amount) {
+        money += amount;
     }
 
     public void moveItem(int startX, int startY) {
