@@ -37,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4278965055088678}
+  - component: {fileID: 114629814703791992}
   m_Layer: 0
   m_Name: InteractableClothesline
   m_TagString: Untagged
@@ -4903,6 +4904,25 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114629814703791992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1272254350809634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3938b6317b57ae84d8a1f36bb600a559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDrops:
+  - {fileID: 1038227593852006, guid: f6ada3e61bec5764cb71f1f7dcfa1685, type: 2}
+  used: 0
+  SpawnPoint: {fileID: 0}
+  _player: {fileID: 0}
+  _inventory: {fileID: 0}
+  yOffset: 2
+  delay: 5
 --- !u!114 &114669394635752994
 MonoBehaviour:
   m_ObjectHideFlags: 1
