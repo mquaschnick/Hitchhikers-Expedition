@@ -8,12 +8,16 @@ public class MapGenerator : MonoBehaviour {
 
 	[Header("Generation")]
 	public int masterSeed = 0;
+    public AnimationCurve perchCurve;
 
     [Header("Balancing")]
     public int mapLength;
     [Range(0.0f, 1.0f)]
     public float farmPercentage = 0.3f;
     public int puddlePerTile = 2;
+    public float birdFrequency = 0.5f;
+
+    private bool placementDone = false;
 
     //[Range(0,1)]
     //public float buildingPercent;
@@ -27,15 +31,27 @@ public class MapGenerator : MonoBehaviour {
 
     [Header("Objects")]
     public GameObject puddle;
+    public GameObject powerline;
+    public GameObject bird;
 
     private TileType[] tileMap;
 
     List<Coord> allTileCoords;
 	Queue<Coord> shuffledTileCoords; //this is a Queue so it can be Shuffled when it is created
 
-	Coord villageCenter;
+    List<GameObject> tileList = new List<GameObject>();
+    private string tileParentName = "TileParent";
+    private Transform tileParent;
 
-	void Awake (){
+    Coord villageCenter;
+
+    private Transform cameraTransform;
+
+    private int n = 0; //n = nextTileNum
+    private float placeNextTileThresold = -275f;
+    private float removeLastTileThresold = -250f;
+
+    void Awake (){
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
@@ -45,27 +61,28 @@ public class MapGenerator : MonoBehaviour {
 
 	void Start ()
 	{
-		GenerateMap ();
+        cameraTransform = Camera.main.gameObject.transform;
+        PlaceStartTiles();
 	}
 
-	public void RandomizeGenerate()
+	public void RandomizeSeed()
     {
 		masterSeed += Random.Range (-10000, 10000);
-		GenerateMap ();
 	}
 
-	public void GenerateMap() 
-	{
+    void GenerateMap()
+    {
+        n = 0;
         Random.InitState(masterSeed);
 
-        allTileCoords = new List<Coord> ();
-		for (int x = 0; x < mapLength; x++) 
-		{
-			allTileCoords.Add (new Coord (x)); //fills the list of coords with each potential coord in the map
-		}
-	
-		shuffledTileCoords = new Queue<Coord> (Utility.ShuffleArray (allTileCoords.ToArray (), masterSeed)); //shuffles all the Coords randomly
-        
+        allTileCoords = new List<Coord>();
+        for (int x = 0; x < mapLength; x++)
+        {
+            allTileCoords.Add(new Coord(x)); //fills the list of coords with each potential coord in the map
+        }
+
+        shuffledTileCoords = new Queue<Coord>(Utility.ShuffleArray(allTileCoords.ToArray(), masterSeed)); //shuffles all the Coords randomly
+
         //Fill tileMap with the base tile (forest)
         tileMap = new TileType[(int)mapLength];
         for (int x = 0; x < mapLength; x++)
@@ -81,24 +98,19 @@ public class MapGenerator : MonoBehaviour {
             tileMap[randomCoord.x] = TileType.EastRuralFarm;
         }
 
-        //
-        string holderName = "Generated Map";
-		if (transform.Find (holderName)) {
-            DestroyImmediate(transform.Find(holderName).gameObject);
-		}
-		Transform villageHolder = new GameObject (holderName).transform; //create parent so the whole village can be deleted later
-		villageHolder.parent = transform;
-
         //Set first and last tile as the populated village tiles
         tileMap[2] = TileType.EastPopVillage;
         tileMap[mapLength - 3] = TileType.EastPopVillage;
 
-		for (int x = 0; x < mapLength; x++) 
-		{
-			Vector3 tilePosition = CoordToPosition (x);
-			GameObject newTile = Instantiate (GetPrefabOfTileType(x), tilePosition, Quaternion.identity) as GameObject;
-			newTile.transform.parent = villageHolder;
-		}
+        //PUDDLES TEMP IMPLEMENTATION---------------------------------------------- should use list later and not spawn all at once
+        //Setup Puddle Parent
+        string holderName = "PuddleParent";
+        if (transform.Find(holderName))
+        {
+            DestroyImmediate(transform.Find(holderName).gameObject);
+        }
+        Transform puddleParent = new GameObject(holderName).transform; //create parent so the whole village can be deleted later
+        puddleParent.parent = transform;
 
         //Place Puddles
         int puddleCount = puddlePerTile * mapLength;
@@ -106,9 +118,106 @@ public class MapGenerator : MonoBehaviour {
         float maxPlacement = CoordToPosition(mapLength).x;
         for (int x = 0; x < puddleCount; x++)
         {
-            Vector3 puddlePosition = new Vector3 (Random.Range(minPlacement, maxPlacement), 0.07f, 0.31f);
+            Vector3 puddlePosition = new Vector3(Random.Range(minPlacement, maxPlacement), 0.07f, 0.31f);
             GameObject newPuddle = Instantiate(puddle, puddlePosition, Quaternion.identity) as GameObject;
-            newPuddle.transform.parent = villageHolder;
+            newPuddle.transform.parent = puddleParent;
+        }
+    }
+
+    public void PlaceStartTiles()
+    {
+        //Setup Tile Parent
+        if (transform.Find(tileParentName))
+        {
+            DestroyImmediate(transform.Find(tileParentName).gameObject);
+        }
+        tileParent = new GameObject(tileParentName).transform; //create parent so the whole village can be deleted later
+        tileParent.parent = transform;
+
+        if (tileList != null)
+        {
+            tileList.Clear();
+        }
+
+        GenerateMap();
+
+        for (int i = 0; i < 11; i++)
+        {
+            PlaceNextTile();
+        }
+        
+    }
+
+    public void PlaceAllTiles()
+    {
+        //Setup Tile Parent
+        if (transform.Find(tileParentName))
+        {
+            DestroyImmediate(transform.Find(tileParentName).gameObject);
+        }
+        tileParent = new GameObject(tileParentName).transform; //create parent so the whole village can be deleted later
+        tileParent.parent = transform;
+
+        GenerateMap();
+
+        for (int i = 0; i < mapLength; i++)
+        {
+            PlaceNextTile();
+        }
+    }
+    void PlaceNextTile()
+    {
+        if (n < mapLength)
+        {
+            Vector3 tilePosition = CoordToPosition(n);
+            GameObject newTile = Instantiate(GetPrefabOfTileType(n), tilePosition, Quaternion.identity) as GameObject;
+            newTile.transform.parent = tileParent;
+            tileList.Add(newTile);
+
+            //powerlines
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject newLine = Instantiate(powerline, new Vector3((tilePosition.x + 12.5f) - (i * 12.5f), 0, 4), Quaternion.identity) as GameObject;
+                newLine.transform.parent = newTile.transform;
+
+                if (Random.Range(0f, 1f) < birdFrequency)
+                {
+                    int birdCount = Random.Range(1, 4);
+
+                    for (int b = 0; b < birdCount; b++)
+                    {
+                        float xRandom = Random.Range(0f, 12.5f);
+                        GameObject newBird = Instantiate(bird, new Vector3(newLine.transform.position.x + xRandom, perchCurve.Evaluate(xRandom), 3.342f), Quaternion.identity) as GameObject;
+                        newBird.transform.parent = tileParent;
+                    }
+                }
+            }
+
+            n++;
+        }
+        else
+        {
+            placementDone = true;
+        }
+    }
+
+    private void Update()
+    {
+        
+        if (cameraTransform.position.x < removeLastTileThresold)
+        {
+            Destroy(tileList[0]);
+            tileList.Remove(tileList[0]);
+            removeLastTileThresold -= 50f;
+        }
+
+        if (!placementDone)
+        {
+            if (cameraTransform.position.x < placeNextTileThresold)
+            {
+                PlaceNextTile();
+                placeNextTileThresold -= 50f;
+            }
         }
     }
 

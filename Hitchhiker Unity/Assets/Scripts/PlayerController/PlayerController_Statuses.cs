@@ -6,7 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerController_Master))]
 public class PlayerController_Statuses : MonoBehaviour {
 
+    public static PlayerController_Statuses instance;
     private PlayerController_Master player;
+    
 
     public Slider hungerBar;
     public Slider thirstBar;
@@ -19,6 +21,7 @@ public class PlayerController_Statuses : MonoBehaviour {
     private float _tickTime;
 
     void Start() {
+        instance = this;
         player = GetComponent<PlayerController_Master>();
         _tickTime = Time.time + tickTime;
     }
