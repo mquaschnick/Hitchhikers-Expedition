@@ -7,7 +7,7 @@ public class D34THReset : MonoBehaviour {
 
 	public void LoadScene() {
 		Time.timeScale = 1;
-		SceneManager.LoadScene("D34TH_T35T");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 }

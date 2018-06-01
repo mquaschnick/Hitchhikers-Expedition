@@ -11,6 +11,11 @@ TagManager:
   - EndOfLevel
   - Despawner
   - Car
+  - EventManager
+  - CarSuccess
+  - Splash
+  - ClothingItem
+  - FoodItem
   layers:
   - Default
   - TransparentFX
@@ -20,9 +25,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Car
+  - Player
+  - Interactable
   - 
   - 
   - 

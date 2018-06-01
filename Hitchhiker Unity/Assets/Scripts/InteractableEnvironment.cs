@@ -39,18 +39,14 @@ public class InteractableEnvironment : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		//Variable to store the result of the Raycast
-		RaycastHit hit;
-		//Ray from the camera to the mouse pointer
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
 		
 		//Check if hit by ray trace from camera to mouse
-		if(Physics.Raycast(ray, out hit) && !used){
+		if(PlayerController_ClickRay.isMouseHover && !used){
+            
 
-			if(hit.transform == this.transform){
+			if(PlayerController_ClickRay.hit.transform == transform){
 
-				this.transform.position = new Vector3 (_transformOriginal.x+Mathf.Sin (Time.time * 10)*0.1f, this.transform.position.y, this.transform.position.z);
+				transform.position = new Vector3 (_transformOriginal.x+Mathf.Sin (Time.time * 10)*0.1f, transform.position.y, transform.position.z);
 
 				//When mouse is pressed
 				if(Input.GetMouseButtonDown(0)){
@@ -63,7 +59,13 @@ public class InteractableEnvironment : MonoBehaviour {
 
 					//Get random gameobject from potential drops list
 					GameObject drop = itemDrops[0];// itemDrops[Random.Range(0, itemDrops.Length)];
-                    _inventory.GetComponent<Scr_Inventory>().addFoodItem(drop);
+
+					if(drop.tag == "FoodItem") {
+                    	_inventory.GetComponent<Scr_Inventory>().addFoodItem(drop);
+					}
+					else if (drop.tag == "ClothingItem") {
+						_inventory.GetComponent<Scr_Inventory>().addClothingItem(drop);
+					}
 
 
                     //Get the player model location

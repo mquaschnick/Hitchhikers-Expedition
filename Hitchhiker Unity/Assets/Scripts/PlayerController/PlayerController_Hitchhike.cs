@@ -22,7 +22,7 @@ public class PlayerController_Hitchhike : MonoBehaviour {
 		delay *= 60;
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		if (count < delay)
 			count++;
 		else {
@@ -30,6 +30,8 @@ public class PlayerController_Hitchhike : MonoBehaviour {
 			SpawnCar();
 		} 
 	}
+
+	
 	
 	void SpawnCar() {
 		float chance = Random.Range(0.0f, 100.0f);
@@ -37,7 +39,7 @@ public class PlayerController_Hitchhike : MonoBehaviour {
 		if (chance <= percent) {
 			GameObject car;
 			chance = Random.Range(0.0f, 100.0f);
-			if (chance <= percent && player.isHitchhiking) {
+			if (chance <= percent && player.isHitchhiking && carSuccess != null) {
 				car = Instantiate(carSuccess, spawnRight.transform.position, spawnRight.transform.rotation);
 			} else {
 				if (chance <= 50.0f)

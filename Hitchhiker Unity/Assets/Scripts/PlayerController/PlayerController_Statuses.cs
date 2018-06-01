@@ -6,18 +6,22 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerController_Master))]
 public class PlayerController_Statuses : MonoBehaviour {
 
+    public static PlayerController_Statuses instance;
     private PlayerController_Master player;
+    
 
     public Slider hungerBar;
     public Slider thirstBar;
     public Slider D34THBar;
 
     public GameObject D34DScreen;
+    public GameObject dirtyObjects;
 
     public float tickTime = 10.0f;
     private float _tickTime;
 
     void Start() {
+        instance = this;
         player = GetComponent<PlayerController_Master>();
         _tickTime = Time.time + tickTime;
     }
@@ -83,6 +87,26 @@ public class PlayerController_Statuses : MonoBehaviour {
            Time.timeScale = 0;
            D34DScreen.SetActive(true);
         }
+    }
+
+    public void damageDeath(float amount) {
+
+        player.D34TH += amount;
+
+        if (player.D34TH > 1) {
+            player.D34TH = 1;
+        }
+
+        D34THBar.value = player.D34TH;
+        if (player.D34TH < 0) {
+            Time.timeScale = 0;
+            D34DScreen.SetActive(true);
+        }
+    }
+    public void setDirty(bool isDirty)
+    {
+        dirtyObjects.SetActive(isDirty);
+        player.isDirty = isDirty;
     }
 
 }

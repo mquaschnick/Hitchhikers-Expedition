@@ -25,7 +25,7 @@ public class Event_Start : MonoBehaviour {
     }
 
     public void StartYN() {
-        string message = "You invented the most amazing product, organic nose rings! You poured every penny you had into this idea, but no one here understands, and refuse to invest in your product.  You're heading out west to California to find an investor! Are you excited?";
+        string message = "You invented the most amazing product, organic nose rings! You're heading out west to California to find an investor! Are you excited?";
         eventPanel.Choice(message, YesFunction, NoFunction);
     }
 
