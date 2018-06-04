@@ -23,7 +23,7 @@ public class TitleScreenButtons : MonoBehaviour {
 
     public void NewGame()
     {
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadGame()
