@@ -30,7 +30,7 @@ public class Event_FlavorEvents : MonoBehaviour
         percentChance /= 100.0f;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!player.isMoving && !player.isInCar)
         {
