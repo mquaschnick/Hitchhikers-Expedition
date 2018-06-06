@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using System.Collections;
 
 public class Event_HitchToTheHike : MonoBehaviour {
-    public Sprite sprite;
+    public Sprite[] spritesArray;
     
     private EventPanel eventPanel;
     private EventDisplayManager eventDisplayManager;
@@ -46,13 +46,11 @@ public class Event_HitchToTheHike : MonoBehaviour {
             msgArray.Add("Get in stranger!");
             msgArray.Add("Need a ride? Just kick all that duct tape under the seat there.");
             msgArray.Add("Hey, glad I saw you before I got past ya.");
-            // High Need Hunger Variant
-            // You're experiencing starvation. Even the leaves look delicious right now. Eat something as soon as possible.
             int rand = (int)Random.Range(0, msgArray.Count);
             string message = (string)msgArray[rand];
-            // Old Placeholder
-            // string message = "You see a very bloody axe in the back seat as the car approaches. 'Boi, be better' the driver says as he speeds away. Would you like grab onto the car last second?";
-            eventPanel.Choice (message, title, YesFunction, NoFunction, sprite);
+            rand = (int)Random.Range(0, spritesArray.Length);
+            Debug.Log(spritesArray[rand]);
+            eventPanel.Choice (message, title, YesFunction, NoFunction, spritesArray[rand]);
         }
     }
 
