@@ -26,9 +26,9 @@ public class TitleScreenButtons : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
-    public void LoadGame()
+    public void ControlsScreen()
     {
-
+        SceneManager.LoadScene("Controls");
     }
 
     public void QuitGame()
