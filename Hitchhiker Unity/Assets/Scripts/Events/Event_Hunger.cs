@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Event_Hunger : MonoBehaviour
 {
+    public Sprite[] spritesArray;
+
     private EventPanel eventPanel;
     private EventDisplayManager eventDisplayManager;
 
@@ -21,7 +23,6 @@ public class Event_Hunger : MonoBehaviour
         eventDisplayManager = EventDisplayManager.Instance();
 
         yesAction = new UnityAction(YesFunction);
-        noAction = new UnityAction(NoFunction);
     }
 
     private void Start()
@@ -47,27 +48,21 @@ public class Event_Hunger : MonoBehaviour
 
     public void HungerYN()
     {
-        // Low Need Hunger Variants
-        // You're hungry. Eating something should help.
-        // You're getting really hungry. You should eat something soon.
-        // Your stomach won't stop growling. Eat something soon.
-        // High Need Hunger Variant
-        // You're experiencing starvation. Even the leaves look delicious right now. Eat something as soon as possible.
-        string message = "Looks like you're hungry. You should probably eat something.";
-        eventPanel.Choice(message, YesFunction, NoFunction);
+        ArrayList msgArray = new ArrayList();
+        msgArray.Add("Looks like you're hungry. You should probably eat something.");
+        msgArray.Add("You’re hungry. Eating something should ward off the effects of hunger.");
+        msgArray.Add("You’re getting really hungry. You should eat something soon.");
+        msgArray.Add("Your stomach won’t stop growling. Eat something soon.");
+        int rand = (int)Random.Range(0, msgArray.Count);
+        string message = (string)msgArray[rand];
+        string title = "Hungery";
+        rand = (int)Random.Range(0, spritesArray.Length);
+        eventPanel.Choice(message, title, YesFunction, spritesArray[rand], "OK");
     }
 
     void YesFunction()
     {
         eventDisplayManager.DisplayMessage("Nothing a little snack can't cure.");
-        player.GetComponent<PlayerController_Statuses>().updateHunger(-0.2f);
-        Time.timeScale = 1;
-    }
-
-    void NoFunction()
-    {
-        eventDisplayManager.DisplayMessage("*stomach growls angrily in protest*");
-        player.injuredAffect = 0.5f;
         Time.timeScale = 1;
     }
 }

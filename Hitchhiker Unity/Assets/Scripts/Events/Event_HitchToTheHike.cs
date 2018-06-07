@@ -42,15 +42,23 @@ public class Event_HitchToTheHike : MonoBehaviour {
             Time.timeScale = 0;
             string title = "Hitchhike";
             ArrayList msgArray = new ArrayList();
+            ArrayList yesArray = new ArrayList();
+            ArrayList noArray = new ArrayList();
             msgArray.Add("Hop in! You like Cher?");
-            msgArray.Add("Get in stranger!");
+            yesArray.Add("Let's go.");
+            noArray.Add("I'll walk.");
+            msgArray.Add("Hey, need a ride? I can get you some of the way.");
+            yesArray.Add("Cool, thanks.");
+            noArray.Add("I'll pass.");
             msgArray.Add("Need a ride? Just kick all that duct tape under the seat there.");
-            msgArray.Add("Hey, glad I saw you before I got past ya.");
+            yesArray.Add("Yea thanks.");
+            noArray.Add("Uhhh no thanks.");
             int rand = (int)Random.Range(0, msgArray.Count);
             string message = (string)msgArray[rand];
+            string yes = (string)yesArray[rand];
+            string no = (string)noArray[rand];
             rand = (int)Random.Range(0, spritesArray.Length);
-            Debug.Log(spritesArray[rand]);
-            eventPanel.Choice (message, title, YesFunction, NoFunction, spritesArray[rand]);
+            eventPanel.Choice (message, title, YesFunction, NoFunction, spritesArray[rand], yes, no);
         }
     }
 
