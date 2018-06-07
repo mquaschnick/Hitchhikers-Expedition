@@ -71,10 +71,7 @@ public class PlayerController_Statuses : MonoBehaviour {
             player.D34TH += amount;
         }
 
-        if (player.thirst >= .8f) {
-            player.D34TH -= amount;
-        }
-        if (player.hunger >= .8f) {
+        if (player.thirst >= .8f && player.hunger >= .8f) {
             player.D34TH -= amount;
         }
         
