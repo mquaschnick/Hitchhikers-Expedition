@@ -39,6 +39,26 @@ public class PlayerController_Movement : MonoBehaviour {
 		transform.position -= new Vector3(player.baseSpeed * _moveMod * player.injuredAffect * _hitchHikeMod * Time.deltaTime, 0.0f, 0.0f);
 	}
 
+    public void setMove( bool isOn ) {
+        player.isMoving = isOn;
+
+        if(isOn) {
+        foreach (Animator anim in characterAnimators)
+        {
+            anim.SetInteger("AnimState", 1);
+        }
+        walkSprite.sprite = walkingSprite;
+        _moveMod = MOVING;
+        } else {
+        foreach (Animator anim in characterAnimators)
+        {
+            anim.SetInteger("AnimState", 0);
+        }
+        walkSprite.sprite = restingSprite;
+        _moveMod = STOPPED;
+        }
+    }
+
 	public void toggleMove() {
 		player.isMoving = !player.isMoving;
         if (player.isMoving && !player.isInCar) {
@@ -58,6 +78,22 @@ public class PlayerController_Movement : MonoBehaviour {
             }
         }
 	}
+
+    public void setHitchHike( bool isOn ) {
+        player.isHitchhiking = isOn;
+        foreach (Animator anim in characterAnimators)
+        {
+            anim.SetBool("Hitchhike", isOn);
+        }
+
+        if(isOn) {
+            thumbSprite.sprite = thumbsUpSprite;
+            _hitchHikeMod = player.hitchHikingSpeedMod;
+        } else {
+            thumbSprite.sprite = thumbsDownSprite;
+            _hitchHikeMod = NOTHITCHHIKING;
+        }
+    }
 
 	public void toggleHitchHike() {
 		player.isHitchhiking = !player.isHitchhiking;

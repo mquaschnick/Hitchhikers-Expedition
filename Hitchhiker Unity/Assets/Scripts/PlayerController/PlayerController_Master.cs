@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController_Master : MonoBehaviour {
 
+    public GameObject shopScreen;
+
 	// Public Variables
     public static GameObject playerBody;
 
@@ -31,6 +33,13 @@ public class PlayerController_Master : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "EndOfLevel") {
             SceneManager.LoadScene("Success");
+        }
+        else if(other.gameObject.tag == "Shop") {
+            PlayerController_Movement moveScript = GetComponent<PlayerController_Movement>();
+            moveScript.setMove(false);
+            moveScript.setHitchHike(false);
+
+            shopScreen.GetComponent<Shop>().open();
         }
     }
 

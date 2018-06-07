@@ -3128,10 +3128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7442e0031b07b0409db437385627335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backpack: {fileID: 0}
+  backpack: {fileID: 1179217384480600}
   isOpen: 0
   startingItem: {fileID: 1038227593852006, guid: f6ada3e61bec5764cb71f1f7dcfa1685,
     type: 2}
+  money: 0
 --- !u!114 &114772500159844968
 MonoBehaviour:
   m_ObjectHideFlags: 1
