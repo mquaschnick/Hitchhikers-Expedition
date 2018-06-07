@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Event_Thirst : MonoBehaviour
 {
+    public Sprite[] spritesArray;
+
     private EventPanel eventPanel;
     private EventDisplayManager eventDisplayManager;
 
@@ -21,7 +23,6 @@ public class Event_Thirst : MonoBehaviour
         eventDisplayManager = EventDisplayManager.Instance();
 
         yesAction = new UnityAction(YesFunction);
-        noAction = new UnityAction(NoFunction);
     }
 
     private void Start()
@@ -47,24 +48,19 @@ public class Event_Thirst : MonoBehaviour
 
     public void ThirstYN()
     {
-        // Low Need Thirst Variants
-        // The thirst is strong. Find something to drink soon.
-        // You're getting really thirsty. You should drink something soon.
-        // High Need Thirst Variant
-        // You're experiencing dehydration. You didn't think your tongue could feel like sandpaper. Find something to drink as soon as possible.
-        string message = "Looks like you're getting thirsty. You should drink something soon.";
-        eventPanel.Choice(message, YesFunction, NoFunction);
+        ArrayList msgArray = new ArrayList();
+        msgArray.Add("Looks like you’re thirsty. You should drink something.");
+        msgArray.Add("The thirst is strong. Find something to drink soon.");
+        int rand = (int)Random.Range(0, msgArray.Count);
+        string message = (string)msgArray[rand];
+        string title = "Thirsty";
+        rand = (int)Random.Range(0, spritesArray.Length);
+        eventPanel.Choice(message, title, YesFunction, spritesArray[rand], "OK");
     }
 
     void YesFunction()
     {
-        eventDisplayManager.DisplayMessage("Ahhhh cool, refreshing, liquid.");
-        Time.timeScale = 1;
-    }
-
-    void NoFunction()
-    {
-        eventDisplayManager.DisplayMessage("The thirst remains strong with this one.");
+        eventDisplayManager.DisplayMessage("Ahhhh need a cool, refreshing, liquid.");
         Time.timeScale = 1;
     }
 }

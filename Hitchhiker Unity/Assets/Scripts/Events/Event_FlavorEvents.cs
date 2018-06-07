@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Event_FlavorEvents : MonoBehaviour
 {
+    public Sprite[] spritesArray;
+
     private EventPanel eventPanel;
     private EventDisplayManager eventDisplayManager;
 
@@ -20,7 +22,6 @@ public class Event_FlavorEvents : MonoBehaviour
         eventPanel = EventPanel.Instance();
         eventDisplayManager = EventDisplayManager.Instance();
 
-        yesAction = new UnityAction(YesFunction);
         noAction = new UnityAction(NoFunction);
     }
 
@@ -49,14 +50,10 @@ public class Event_FlavorEvents : MonoBehaviour
     {
 
         // These will be random things that pop up that don't affect anything, but add some flavor text to their life.
-        string message = "A scrap of a magazine cover you saw says there's been an outcry for [your noun] in California. Apparently developers are popping up left and right to chase this money trail. Better start running.";
-        eventPanel.Choice(message, YesFunction, NoFunction);
-    }
-
-    void YesFunction()
-    {
-        eventDisplayManager.DisplayMessage("That's...not...great.");
-        Time.timeScale = 1;
+        string message = "A scrap of a magazine cover you saw says there's been an outcry for organic nose rings in California. Developers are popping up to chase this money trail.";
+        string title = "Magazine Scrap";
+        int rand = (int)Random.Range(0, spritesArray.Length);
+        eventPanel.Choice(message, title, NoFunction, spritesArray[rand], "Better Hurry");
     }
 
     void NoFunction()

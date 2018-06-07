@@ -44,6 +44,7 @@ public class EventPanel : MonoBehaviour {
         event2.onClick.AddListener (ClosePanel);
 
 		// Message
+        this.title.text = "Event Window";
         this.message.text = message;
         event1.GetComponentInChildren<Text>().text = "Yes";
         event2.GetComponentInChildren<Text>().text = "No";
@@ -96,6 +97,7 @@ public class EventPanel : MonoBehaviour {
         event2.onClick.AddListener (ClosePanel);
 
 		// Message
+        this.title.text = "Event Window";
         this.message.text = message;
         event1.GetComponentInChildren<Text>().text = "Yes";
         event2.GetComponentInChildren<Text>().text = "No";
