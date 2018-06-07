@@ -16,6 +16,7 @@ TagManager:
   - Splash
   - ClothingItem
   - FoodItem
+  - Shop
   layers:
   - Default
   - TransparentFX
