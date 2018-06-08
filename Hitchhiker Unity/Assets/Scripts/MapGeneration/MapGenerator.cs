@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MapGenerator : MonoBehaviour {
 	public static MapGenerator instance = null;
@@ -34,6 +35,9 @@ public class MapGenerator : MonoBehaviour {
     public GameObject powerline;
     public GameObject bird;
 
+    [Header("Outside References")]
+    public Slider nextTownSlider;
+
     private TileType[] tileMap;
 
     List<Coord> allTileCoords;
@@ -51,6 +55,9 @@ public class MapGenerator : MonoBehaviour {
     private float placeNextTileThresold = -275f;
     private float removeLastTileThresold = -250f;
 
+    private float nextTownXPos;
+    private float nextTownRelativeStartXPos;
+
     void Awake (){
 		if (instance == null) {
 			instance = this;
@@ -63,7 +70,8 @@ public class MapGenerator : MonoBehaviour {
 	{
         cameraTransform = Camera.main.gameObject.transform;
         PlaceStartTiles();
-	}
+        nextTownRelativeStartXPos = PlayerController_Master.playerBody.transform.position.x;
+    }
 
 	public void RandomizeSeed()
     {
@@ -98,9 +106,12 @@ public class MapGenerator : MonoBehaviour {
             tileMap[randomCoord.x] = TileType.EastRuralFarm;
         }
 
-        //Set first and last tile as the populated village tiles
+        //Set first and last and middle tile as the populated village tiles
         tileMap[2] = TileType.EastPopVillage;
         tileMap[mapLength - 3] = TileType.EastPopVillage;
+        int halfWay = (int)(mapLength / 2);
+        tileMap[halfWay] = TileType.EastPopVillage;
+        nextTownXPos = halfWay * -50f;
 
         //PUDDLES TEMP IMPLEMENTATION---------------------------------------------- should use list later and not spawn all at once
         //Setup Puddle Parent
@@ -219,6 +230,21 @@ public class MapGenerator : MonoBehaviour {
                 placeNextTileThresold -= 50f;
             }
         }
+        float playerX = PlayerController_Master.playerBody.transform.position.x;
+
+        if (playerX < nextTownXPos)
+        {
+            //You passed the town
+            nextTownXPos = (mapLength - 3) * -50f;
+            nextTownRelativeStartXPos = playerX;
+            EventDisplayManager.instance.DisplayMessage("Yes! I'm halfway there.");
+        }
+        else
+        {
+            nextTownSlider.value = (playerX - nextTownRelativeStartXPos) / (nextTownXPos - nextTownRelativeStartXPos);
+            //print("player: " + playerX + " nextTown: " + nextTownXPos + " nextTownStartXPos: " + nextTownRelativeStartXPos);
+        }
+
     }
 
     GameObject GetPrefabOfTileType (int x)
