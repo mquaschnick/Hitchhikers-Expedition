@@ -58,6 +58,7 @@ MonoBehaviour:
   height: 1
   itemName: Energy Bar
   image: {fileID: 21300000, guid: 840b9bedfacae204a9397bcdd279e842, type: 3}
+  shopCost: 2
   _player: {fileID: 0}
   _inventory: {fileID: 0}
 --- !u!212 &212383275666178882

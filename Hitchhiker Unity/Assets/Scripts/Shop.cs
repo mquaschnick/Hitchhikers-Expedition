@@ -15,15 +15,23 @@ public class Shop : MonoBehaviour {
 		moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
 	}
 
-	public void tryPay(float cost)
-	{
-		_inventory.GetComponent<Scr_Inventory>().addMoney(-1*cost);
-		moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
-	}
+	// public void tryPay(float cost)
+	// {
+	// 	_inventory.GetComponent<Scr_Inventory>().addMoney(-1*cost);
+	// 	moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+	// }
 
 	public void buy(GameObject item)
 	{
-		_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
+		float itemCost = item.GetComponent<Scr_FoodItem>().shopCost;
+		float currentMoney = _inventory.GetComponent<Scr_Inventory>().money;
+
+		if(itemCost <= currentMoney)
+		{
+			_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
+			_inventory.GetComponent<Scr_Inventory>().addMoney(-itemCost);
+			moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+		}
 	}
 
 	public void steal(GameObject item)
@@ -34,8 +42,12 @@ public class Shop : MonoBehaviour {
 			_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
 		else
 		{
-			_inventory.GetComponent<Scr_Inventory>().addMoney(-7);
-			moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+			exit();
 		}
+	}
+
+	public void exit()
+	{
+		gameObject.SetActive(false);
 	}
 }

@@ -58,6 +58,7 @@ MonoBehaviour:
   height: 1
   itemName: Soda
   image: {fileID: 21300000, guid: 9cbede4c4f4bc4446935a9549a8f7056, type: 3}
+  shopCost: 3
   _player: {fileID: 0}
   _inventory: {fileID: 0}
 --- !u!212 &212744815550887908

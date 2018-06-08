@@ -14,7 +14,7 @@ public class Scr_Inventory : MonoBehaviour {
 
     public GameObject startingItem;
 
-    public float money;
+    public float money = 20.00f;
 
 
 	// Use this for initialization
