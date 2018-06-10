@@ -11,6 +11,7 @@ public class PlayerController_Movement : MonoBehaviour {
     public RuntimeAnimatorController MaleAnimator, FemaleAnimator;
 
 	private PlayerController_Master player;
+    public Scr_Inventory Inventory;
 
     public Sprite thumbsUpSprite;
     public Sprite thumbsDownSprite;
@@ -30,19 +31,69 @@ public class PlayerController_Movement : MonoBehaviour {
 	private const float STOPPED = 0.0f;
 	private const float NOTHITCHHIKING = 1.0f;
 
+    bool MovePressed = false; //Different from isMoving. This is for the hotkey press.
+    //bool HitchhikePressed = false; //same as above but for different hotkey.
+
 	void Start () {
 		player = GetComponent<PlayerController_Master>();
 		player.isMoving = false;
 		player.isHitchhiking = false;
+        MovePressed = false;
+        //HitchhikePressed = false;
         SetupAnimList(characterAnimators);
         CheckMaleOrFemale();
+        if (Inventory == null)
+        {
+            Inventory = GameObject.Find("Inventory").GetComponent<Scr_Inventory>();
+        }
         thumbSprite = GameObject.FindGameObjectWithTag("ThumbButton").GetComponent<Image>();
         walkSprite = GameObject.FindGameObjectWithTag("WalkButton").GetComponent<Image>();
     }
 
 	void Update () {
 		transform.position -= new Vector3(player.baseSpeed * _moveMod * player.injuredAffect * _hitchHikeMod * Time.deltaTime, 0.0f, 0.0f);
-	}
+
+        //Hotkey to move instead of using UI Buttons.
+        float move = Input.GetAxis("Horizontal");
+        if (!player.isMoving)
+        {
+            MovePressed = false;
+        }
+        if (move < -0.1) //If A/left/any other input method going left, is pressed
+        {
+            if(!MovePressed && !player.isMoving)
+            {
+                MovePressed = true;
+                toggleMove();
+            }
+        }
+        else if (move <= 0.1 && move >= -0.1)
+        {
+            if(MovePressed && player.isMoving)
+            {
+                MovePressed = false;
+                toggleMove();
+            }
+        }
+        else if (move > 0.1)
+        {
+            MovePressed = false;
+            if (player.isMoving)
+            {
+                toggleMove();
+            }
+        }
+
+        if (Input.GetButtonDown("Inventory")) //hotkey for inventory
+        {
+            Inventory.toggleInventory();
+        }
+        if (Input.GetButtonDown("Hitchhike")) //hotkey for inventory
+        {
+            toggleHitchHike();
+        }
+
+    }
 
     public void setMove( bool isOn ) {
         player.isMoving = isOn;

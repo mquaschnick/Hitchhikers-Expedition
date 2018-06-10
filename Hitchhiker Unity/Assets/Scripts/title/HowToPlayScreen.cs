@@ -14,6 +14,7 @@ public class HowToPlayScreen : MonoBehaviour {
     public Text InstructionText, InstructionHeader;
     public GameObject ContinueButton, ReturnButton;
     public GameObject BeginButton;
+    public GameObject BeginButton2;
 
     [Header("Index")]
     public int InstructionIndex;
@@ -92,6 +93,7 @@ public class HowToPlayScreen : MonoBehaviour {
             {
                 ContinueButton.SetActive(false);
                 BeginButton.SetActive(true);
+                BeginButton2.SetActive(false);
             }
             InstructionElement.sprite = (spriteList[InstructionIndex]);
             InstructionText.text = (TextList[InstructionIndex]);
@@ -104,6 +106,7 @@ public class HowToPlayScreen : MonoBehaviour {
         if (InstructionIndex > 0)
         {
             BeginButton.SetActive(false);
+            BeginButton2.SetActive(true);
             InstructionIndex--;
             ContinueButton.SetActive(true);
             if (InstructionIndex <= 0)
