@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController_Master))]
 public class PlayerController_Movement : MonoBehaviour {
+    public List<Animator> AnimatorList = new List<Animator>();
     public Animator[] characterAnimators;
+    
+    public RuntimeAnimatorController MaleAnimator, FemaleAnimator;
 
 	private PlayerController_Master player;
 
@@ -31,6 +34,8 @@ public class PlayerController_Movement : MonoBehaviour {
 		player = GetComponent<PlayerController_Master>();
 		player.isMoving = false;
 		player.isHitchhiking = false;
+        SetupAnimList(characterAnimators);
+        CheckMaleOrFemale();
         thumbSprite = GameObject.FindGameObjectWithTag("ThumbButton").GetComponent<Image>();
         walkSprite = GameObject.FindGameObjectWithTag("WalkButton").GetComponent<Image>();
     }
@@ -139,5 +144,25 @@ public class PlayerController_Movement : MonoBehaviour {
     public void getOutCar() {
         player.isInCar = false;
         PlayerController_Master.playerBody.SetActive(true);
+    }
+
+    public void SetupAnimList(Animator[] playerAnims)
+    {
+        AnimatorList = new List<Animator>();
+        foreach(Animator playerAnim in playerAnims)
+        {
+            AnimatorList.Add(playerAnim);
+        }
+    }
+    public void CheckMaleOrFemale()
+    {
+        if (SavedPlayerStats.IsFemale == false)
+        { 
+            AnimatorList[0].runtimeAnimatorController = MaleAnimator;
+        }
+        else if (SavedPlayerStats.IsFemale == true)
+        {
+            AnimatorList[0].runtimeAnimatorController = FemaleAnimator;
+        }
     }
 }

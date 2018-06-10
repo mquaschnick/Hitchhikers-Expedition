@@ -2310,12 +2310,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f474e0a7e31512439b8bbf5c6eb7fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimatorList: []
   characterAnimators:
   - {fileID: 95251339828503234}
   - {fileID: 95151189445932510}
   - {fileID: 95408858378011614}
   - {fileID: 95105945384024040}
   - {fileID: 95396675172810556}
+  MaleAnimator: {fileID: 9100000, guid: 0bbf445ec57ebfe4da348fad6393c02b, type: 2}
+  FemaleAnimator: {fileID: 9100000, guid: 28268311df0b74a41953cea02ed019ec, type: 2}
   thumbsUpSprite: {fileID: 21300002, guid: dba7f92bc14b25640958c1e5cb2b30be, type: 3}
   thumbsDownSprite: {fileID: 21300000, guid: dba7f92bc14b25640958c1e5cb2b30be, type: 3}
   walkingSprite: {fileID: 21300002, guid: ae67d9bd07e884b4bb35c9b2b5a589fb, type: 3}
