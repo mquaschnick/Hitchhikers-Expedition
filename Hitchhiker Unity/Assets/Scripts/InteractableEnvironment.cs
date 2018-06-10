@@ -59,7 +59,13 @@ public class InteractableEnvironment : MonoBehaviour {
 
 					//Get random gameobject from potential drops list
 					GameObject drop = itemDrops[0];// itemDrops[Random.Range(0, itemDrops.Length)];
-                    _inventory.GetComponent<Scr_Inventory>().addFoodItem(drop);
+
+					if(drop.tag == "FoodItem") {
+                    	_inventory.GetComponent<Scr_Inventory>().addFoodItem(drop);
+					}
+					else if (drop.tag == "ClothingItem") {
+						_inventory.GetComponent<Scr_Inventory>().addClothingItem(drop);
+					}
 
 
                     //Get the player model location

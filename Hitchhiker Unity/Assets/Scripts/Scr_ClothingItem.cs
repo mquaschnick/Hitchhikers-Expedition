@@ -26,7 +26,10 @@ public class Scr_ClothingItem : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player");
         _inventory = GameObject.FindGameObjectWithTag("Inventory");
 
-        PlayerController_Master.playerBody.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        //PlayerController_Master.playerBody.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        PlayerController_Statuses status = _player.GetComponent<PlayerController_Statuses>();
+        status.setDirty(false);
+        EventDisplayManager.instance.DisplayMessage("Nothing like some fresh hipster clothes.");
 
         for (int i = startX; i < startX + width; i++) {
             for (int j = startY; j < startY + height; j++) {

@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Working Scenes/AlphaEnvironment.unity
-    guid: 36daf5bd62ab0a94789e5e6d6b3942ac
+    path: Assets/Scenes/Working Scenes/TitleScreen.unity
+    guid: 220ee24c18d221e43b4575c54d1d0b4c
+  - enabled: 1
+    path: Assets/Scenes/Working Scenes/Controls.unity
+    guid: 98e93a3bfced89f4c97c9d8fce3a7d35
+  - enabled: 1
+    path: Assets/Scenes/Working Scenes/CharaSelect.unity
+    guid: a4a716186c68ecf4caf2f0edcd648ffa
+  - enabled: 1
+    path: Assets/Scenes/Working Scenes/BetaEnvironment.unity
+    guid: 6e5d2030236625540b3a8f5102866407
   - enabled: 1
     path: Assets/Scenes/Test Scenes/Success.unity
     guid: e01796b726fcd554c9ce0b149eed0eb7

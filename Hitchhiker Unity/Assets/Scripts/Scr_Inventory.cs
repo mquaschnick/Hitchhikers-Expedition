@@ -130,7 +130,7 @@ public class Scr_Inventory : MonoBehaviour {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (buttons[i, j].GetComponent<Image>().sprite == null) {
+                if (buttons[i, j].GetComponent<Image>().sprite == null && i+clothesScript.width-1 < buttons.GetLength(1) && j+clothesScript.height-1 < buttons.GetLength(0)) {
                     canPlace = true;
                     for (int k = i; k < i + clothesScript.width; k++) {
                         for (int l = j; l < j + clothesScript.height; l++) {
