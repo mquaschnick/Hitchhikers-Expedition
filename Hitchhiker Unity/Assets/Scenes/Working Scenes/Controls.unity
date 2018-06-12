@@ -428,7 +428,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 23020f00dd7a4a94f8c10496002f3001, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -535,6 +535,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b7c3344562cc66145a80efb29fbfb1fe, type: 3}
   - {fileID: 21300000, guid: 27d5eede7f1b5ea43804aa22819562ed, type: 3}
   - {fileID: 21300000, guid: 98bb3350705aa294ea5605af5345b6ca, type: 3}
+  - {fileID: 21300000, guid: 47f999adb17540b4fac6e2efb5bce974, type: 3}
   - {fileID: 21300000, guid: 9243b83567fb5e74aaf4e2b75dd294ce, type: 3}
   Headers:
   - 
@@ -546,6 +547,7 @@ MonoBehaviour:
   - Life. Hunger. and Thirst Meters
   - Food
   - Clothing
+  - Hotkey Buttons
   - 
   Texts:
   - 
@@ -564,6 +566,7 @@ MonoBehaviour:
     can also buy nourishment at shops.
   - The state of your clothing will affect if people will pick you up. Being dirty
     will cause them to ignore you. Click on clothes off racks to steal them.
+  - 
   - 
 --- !u!4 &402582755
 Transform:
@@ -645,7 +648,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play
+  m_Text: Skip
 --- !u!222 &424292804
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1232,7 +1235,7 @@ GameObject:
   - component: {fileID: 1817240590}
   - component: {fileID: 1817240589}
   m_Layer: 5
-  m_Name: Begin Game (1)
+  m_Name: Skip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
