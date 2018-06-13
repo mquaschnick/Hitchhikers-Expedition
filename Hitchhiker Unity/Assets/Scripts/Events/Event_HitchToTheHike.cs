@@ -47,7 +47,7 @@ public class Event_HitchToTheHike : MonoBehaviour {
             msgArray.Add("Hop in! You like Cher?");
             yesArray.Add("Let's go.");
             noArray.Add("I'll walk.");
-            msgArray.Add("Hey, need a ride? I can get you some of the way.");
+            msgArray.Add("Hey, need a ride?");
             yesArray.Add("Cool, thanks.");
             noArray.Add("I'll pass.");
             msgArray.Add("Need a ride? Just kick all that duct tape under the seat there.");
