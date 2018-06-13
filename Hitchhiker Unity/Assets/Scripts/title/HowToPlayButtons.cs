@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class HowToPlayButtons : MonoBehaviour {
 
+   
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,13 +16,13 @@ public class HowToPlayButtons : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ReturnToTitle();
+            BeginGame();
         }
 	}
 
 
-    public void ReturnToTitle()
+    public void BeginGame()
     {
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene("CharaSelect");
     }
 }

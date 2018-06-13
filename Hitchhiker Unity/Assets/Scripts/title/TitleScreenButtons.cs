@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 public class TitleScreenButtons : MonoBehaviour {
 
 
+    [Tooltip("After player goes through the opening bits of the game, this scene is where begin button in character select will take you.")]
+    public string GameplaySceneName = "BetaEnvironment";
+
     public void NewGame()
     {
-        SceneManager.LoadScene(1);
+        SavedPlayerStats.StartingGameLevelSceneName = GameplaySceneName;
+        SceneManager.LoadScene("Controls");
     }
 
-    public void ControlsScreen()
+    public void LoadGame()
     {
-        SceneManager.LoadScene(3);
+        //SceneManager.LoadScene(3);
     }
 
     public void QuitGame()

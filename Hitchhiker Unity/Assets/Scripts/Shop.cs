@@ -39,15 +39,23 @@ public class Shop : MonoBehaviour {
         gameObject.SetActive(false);
 	}
 
-	public void tryPay(float cost)
-	{
-		_inventory.GetComponent<Scr_Inventory>().addMoney(-1*cost);
-		moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
-	}
+	// public void tryPay(float cost)
+	// {
+	// 	_inventory.GetComponent<Scr_Inventory>().addMoney(-1*cost);
+	// 	moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+	// }
 
 	public void buy(GameObject item)
 	{
-		_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
+		float itemCost = item.GetComponent<Scr_FoodItem>().shopCost;
+		float currentMoney = _inventory.GetComponent<Scr_Inventory>().money;
+
+		if(itemCost <= currentMoney)
+		{
+			_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
+			_inventory.GetComponent<Scr_Inventory>().addMoney(-itemCost);
+			moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+		}
 	}
 
 	public void steal(GameObject item)
@@ -65,5 +73,10 @@ public class Shop : MonoBehaviour {
 			audio.clip = merchantYelling;
 		    audio.Play();
 		}
+	}
+
+	public void exit()
+	{
+		gameObject.SetActive(false);
 	}
 }
