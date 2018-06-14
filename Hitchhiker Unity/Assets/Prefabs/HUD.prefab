@@ -1100,7 +1100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1824741290374566
 GameObject:
   m_ObjectHideFlags: 1
@@ -3565,7 +3565,7 @@ MonoBehaviour:
   isOpen: 0
   startingItem: {fileID: 1038227593852006, guid: f6ada3e61bec5764cb71f1f7dcfa1685,
     type: 2}
-  money: 20
+  money: 15
 --- !u!114 &114632691179043190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4604,7 +4604,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $20.00
+  m_Text: $15.00
 --- !u!114 &114933629205241614
 MonoBehaviour:
   m_ObjectHideFlags: 1

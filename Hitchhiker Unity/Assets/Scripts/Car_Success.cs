@@ -19,7 +19,7 @@ public class Car_Success : MonoBehaviour {
         eventManager = GameObject.FindGameObjectWithTag("EventManager");
         startTime = Time.time;
         offset = 0;
-        delay = Mathf.Floor(Random.Range(600, 900));
+        delay = Mathf.Floor(Random.Range(900, 1300));
 	}
 
     public void setOffset(float num) {
@@ -28,7 +28,7 @@ public class Car_Success : MonoBehaviour {
 	
 	void FixedUpdate () {
 		Vector3 playerVector = new Vector3(player.transform.position.x + offset, transform.position.y, transform.position.z);
-		float distCovered = (Time.time - startTime) * 0.05f;
+		float distCovered = (Time.time - startTime) * 0.025f;
 		float journeyLength = Vector3.Distance(transform.position, playerVector);
         float fracJourney = distCovered / journeyLength;
 		transform.position = Vector3.Lerp(transform.position, playerVector, fracJourney);

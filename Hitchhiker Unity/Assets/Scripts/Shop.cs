@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour {
 
 	public GameObject _inventory;
-	private Image image;
-	private Text text;
+	public Image image;
+	public Text text;
 	private AudioSource audio;
 	public float stealChance;
 	public Text moneyText;
@@ -22,8 +22,6 @@ public class Shop : MonoBehaviour {
         _inventory = GameObject.FindGameObjectWithTag("Inventory");
 		moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
 
-		image = transform.GetChild(0).GetComponent<Image>();
-		text = transform.GetChild(1).GetComponent<Text>();
 		audio = GetComponent<AudioSource>();
 	}
 
