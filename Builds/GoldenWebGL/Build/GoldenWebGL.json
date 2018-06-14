@@ -1,0 +1,13 @@
+{
+"companyName": "Project Constantine",
+"productName": "Hitchhiker's Expedition",
+"dataUrl": "GoldenWebGL.data.unityweb",
+"asmCodeUrl": "GoldenWebGL.asm.code.unityweb",
+"asmMemoryUrl": "GoldenWebGL.asm.memory.unityweb",
+"asmFrameworkUrl": "GoldenWebGL.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}

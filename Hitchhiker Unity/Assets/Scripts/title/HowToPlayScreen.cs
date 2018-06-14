@@ -11,14 +11,19 @@ public class HowToPlayScreen : MonoBehaviour {
     [Header("GameObjects and UI Element References")]
     public GameObject InstructionCanvas, instructionPanel;
     public Image InstructionElement;
+    public Text InstructionText, InstructionHeader;
     public GameObject ContinueButton, ReturnButton;
+    public GameObject BeginButton;
+    public GameObject BeginButton2;
 
     [Header("Index")]
     public int InstructionIndex;
 
     [Header("Lists Management")]
-    [Tooltip("Keep as 0 in editor. Gets set be a different script.")]
+    [Tooltip("Keep as 1 in editor. Gets set be a different script.")]
     public List<Sprite> spriteList = new List<Sprite>();
+    public List<string> TextList = new List<string>();
+    public List<string> HeaderList = new List<string>();
 
     [Header("Sound")]
     public AudioClip BeepAudio;
@@ -28,20 +33,35 @@ public class HowToPlayScreen : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         Instance = this;
-	} 
-	
-	// Update is called once per frame
-	void Update () {
+        
+	}
+
+    private void Start()
+    {
+        BeginButton.SetActive(false);
+    }
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
-    public void AddNewImages(Sprite[] UISprites)
+    public void AddNewImages(Sprite[] UISprites, string[] TutorialTexts, string[] TutorialTitles)
     {
         InstructionIndex = -1;
         spriteList = new List<Sprite>();
         foreach (Sprite UISprite in UISprites)
         {
             spriteList.Add(UISprite);
+        }
+        TextList = new List<string>();
+        foreach (string TutorialText in TutorialTexts)
+        {
+            TextList.Add(TutorialText);
+        }
+        HeaderList = new List<string>();
+        foreach (string TutorialTitle in TutorialTitles)
+        {
+            HeaderList.Add(TutorialTitle);
         }
         CreateTutorialList();
     }
@@ -58,7 +78,8 @@ public class HowToPlayScreen : MonoBehaviour {
         {
             InstructionIndex++;
             InstructionElement.sprite = (spriteList[InstructionIndex]);
-
+            InstructionText.text = (TextList[InstructionIndex]);
+            InstructionHeader.text = (HeaderList[InstructionIndex]);
         }
     }
 
@@ -71,9 +92,12 @@ public class HowToPlayScreen : MonoBehaviour {
             if (InstructionIndex >= spriteList.Count - 1)
             {
                 ContinueButton.SetActive(false);
+                BeginButton.SetActive(true);
+                BeginButton2.SetActive(false);
             }
             InstructionElement.sprite = (spriteList[InstructionIndex]);
-           
+            InstructionText.text = (TextList[InstructionIndex]);
+            InstructionHeader.text = (HeaderList[InstructionIndex]);
         }
     }
 
@@ -81,6 +105,8 @@ public class HowToPlayScreen : MonoBehaviour {
     {
         if (InstructionIndex > 0)
         {
+            BeginButton.SetActive(false);
+            BeginButton2.SetActive(true);
             InstructionIndex--;
             ContinueButton.SetActive(true);
             if (InstructionIndex <= 0)
@@ -88,6 +114,8 @@ public class HowToPlayScreen : MonoBehaviour {
                 ReturnButton.SetActive(false);
             }
             InstructionElement.sprite = (spriteList[InstructionIndex]);
+            InstructionText.text = (TextList[InstructionIndex]);
+            InstructionHeader.text = (HeaderList[InstructionIndex]);
         }
     }
 

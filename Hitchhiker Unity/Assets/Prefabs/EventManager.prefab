@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spritesArray:
   - {fileID: 21300000, guid: c6a08102fb95b66448b11fdab90ae968, type: 3}
-  percentChance: 0.5
+  percentChance: 1
 --- !u!114 &114361734911702006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,6 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdce2bfd2118c04988d752dab93fb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spritesArray:
+  - {fileID: 21300000, guid: 3046a6442f3479140987a5e4ae42f12b, type: 3}
 --- !u!114 &114762316686341104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,4 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spritesArray:
   - {fileID: 21300000, guid: df94734f4283ccf488a7cc4baf41a41a, type: 3}
-  percentChance: 0.5
+  percentChance: 1

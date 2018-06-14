@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using System.Collections;
 
 public class Event_Start : MonoBehaviour {
+    public Sprite[] spritesArray;
 
     private EventPanel eventPanel;
     private EventDisplayManager eventDisplayManager;
@@ -26,7 +27,8 @@ public class Event_Start : MonoBehaviour {
 
     public void StartYN() {
         string message = "You invented the most amazing product, organic nose rings! You're heading out west to California to find an investor! Are you excited?";
-        eventPanel.Choice(message, YesFunction, NoFunction);
+        int rand = (int)Random.Range(0, spritesArray.Length);
+        eventPanel.Choice(message, YesFunction, NoFunction, spritesArray[rand]);
     }
 
     void YesFunction() {

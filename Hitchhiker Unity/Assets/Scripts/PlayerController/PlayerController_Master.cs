@@ -30,6 +30,14 @@ public class PlayerController_Master : MonoBehaviour {
         playerBody = transform.GetChild(1).gameObject;
     }
 
+    private void Update() {
+        if(Input.GetKey(KeyCode.Escape)){
+            Application.Quit();
+        }
+    }
+
+
+
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "EndOfLevel") {
             SceneManager.LoadScene("Success");

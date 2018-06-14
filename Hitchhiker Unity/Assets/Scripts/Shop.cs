@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour {
 
 	public GameObject _inventory;
-	private Image image;
-	private Text text;
+	public Image image;
+	public Text text;
 	private AudioSource audio;
 	public float stealChance;
 	public Text moneyText;
@@ -22,8 +22,6 @@ public class Shop : MonoBehaviour {
         _inventory = GameObject.FindGameObjectWithTag("Inventory");
 		moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
 
-		image = transform.GetChild(0).GetComponent<Image>();
-		text = transform.GetChild(1).GetComponent<Text>();
 		audio = GetComponent<AudioSource>();
 	}
 
@@ -39,15 +37,23 @@ public class Shop : MonoBehaviour {
         gameObject.SetActive(false);
 	}
 
-	public void tryPay(float cost)
-	{
-		_inventory.GetComponent<Scr_Inventory>().addMoney(-1*cost);
-		moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
-	}
+	// public void tryPay(float cost)
+	// {
+	// 	_inventory.GetComponent<Scr_Inventory>().addMoney(-1*cost);
+	// 	moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+	// }
 
 	public void buy(GameObject item)
 	{
-		_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
+		float itemCost = item.GetComponent<Scr_FoodItem>().shopCost;
+		float currentMoney = _inventory.GetComponent<Scr_Inventory>().money;
+
+		if(itemCost <= currentMoney)
+		{
+			_inventory.GetComponent<Scr_Inventory>().addFoodItem(item);
+			_inventory.GetComponent<Scr_Inventory>().addMoney(-itemCost);
+			moneyText.text = "$"+_inventory.GetComponent<Scr_Inventory>().money;
+		}
 	}
 
 	public void steal(GameObject item)
@@ -65,5 +71,10 @@ public class Shop : MonoBehaviour {
 			audio.clip = merchantYelling;
 		    audio.Play();
 		}
+	}
+
+	public void exit()
+	{
+		gameObject.SetActive(false);
 	}
 }

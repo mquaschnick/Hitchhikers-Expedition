@@ -2466,7 +2466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7fb14eab473a144b983250e5b663e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poopInterval: 3
+  poopInterval: 4
   poopIntervalRandomness: 1
   poop: {fileID: 1307264464907018}
 --- !u!135 &135330908923703050

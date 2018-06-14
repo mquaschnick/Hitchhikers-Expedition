@@ -11,6 +11,7 @@ public class Scr_FoodItem : MonoBehaviour {
     public int height;
     public string itemName;
     public Sprite image;
+    public float shopCost;
 
     //public int positionX = 0;
     //public int positionY = 0;
